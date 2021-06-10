@@ -5,16 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="img/icone.jpg">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Cadastro (Paciente)</title>
   </head>
   <body>
     <nav>
         <ul>
             <li>
-              <a> <img src="img/logo.png" height="40px" width="40px"> </a>
+              <a> <img src="img/logo.png" height="55px" width="55px"> </a>
             </li>
             <li class="linavtexto">
                 <a href="#"> Home </a>
@@ -29,68 +30,75 @@
     </nav>
     <div>
     <form>
-      <div></div>
-      <label>Nome Completo
-        <input type="email" placeholder="Nome Completo">
-      </label>
+      <div class="linha">
+        <h1 class="coluna">Cadastre-se</h1>
+      </div>
+      <div class="linha">
+        <label class="coluna">Nome Completo
+          <input type="text">
+        </label>
+        
+        <label class="coluna">CPF
+          <input type="number">
+        </label>
+      </div>
+      <div class="linha">
+        <label class="coluna">Estado
+          <select name="estado"> 
+            <option value="estado">Selecione o Estado</option> 
+            <option value="ac">Acre</option> 
+            <option value="al">Alagoas</option> 
+            <option value="am">Amazonas</option> 
+            <option value="ap">Amapá</option> 
+            <option value="ba">Bahia</option> 
+            <option value="ce">Ceará</option> 
+            <option value="df">Distrito Federal</option> 
+            <option value="es">Espírito Santo</option> 
+            <option value="go">Goiás</option> 
+            <option value="ma">Maranhão</option> 
+            <option value="mt">Mato Grosso</option> 
+            <option value="ms">Mato Grosso do Sul</option> 
+            <option value="mg">Minas Gerais</option> 
+            <option value="pa">Pará</option> 
+            <option value="pb">Paraíba</option> 
+            <option value="pr">Paraná</option> 
+            <option value="pe">Pernambuco</option> 
+            <option value="pi">Piauí</option> 
+            <option value="rj">Rio de Janeiro</option> 
+            <option value="rn">Rio Grande do Norte</option> 
+            <option value="ro">Rondônia</option> 
+            <option value="rs">Rio Grande do Sul</option> 
+            <option value="rr">Roraima</option> 
+            <option value="sc">Santa Catarina</option> 
+            <option value="se">Sergipe</option> 
+            <option value="sp">São Paulo</option> 
+            <option value="to">Tocantins</option> 
+          </select>
+        </label>
+        
+        <label class="coluna">Cidade
+          <input type="text">
+        </label>
+      </div>
+      
+      <div class="linha">
+        <label class="coluna">Email
+          <input type="email">
+        </label>
+        <label class="coluna">Confirmar Email
+          <input type="email">
+        </label>
+      </div>
 
-      
-      <label>CPF
-        <input type="email" placeholder="nome@email.com">
-      </label>
-      
-      <label>Estado
-        <select name="estado"> 
-        <option value="estado">Selecione o Estado</option> 
-        <option value="ac">Acre</option> 
-        <option value="al">Alagoas</option> 
-        <option value="am">Amazonas</option> 
-        <option value="ap">Amapá</option> 
-        <option value="ba">Bahia</option> 
-        <option value="ce">Ceará</option> 
-        <option value="df">Distrito Federal</option> 
-        <option value="es">Espírito Santo</option> 
-        <option value="go">Goiás</option> 
-        <option value="ma">Maranhão</option> 
-        <option value="mt">Mato Grosso</option> 
-        <option value="ms">Mato Grosso do Sul</option> 
-        <option value="mg">Minas Gerais</option> 
-        <option value="pa">Pará</option> 
-        <option value="pb">Paraíba</option> 
-        <option value="pr">Paraná</option> 
-        <option value="pe">Pernambuco</option> 
-        <option value="pi">Piauí</option> 
-        <option value="rj">Rio de Janeiro</option> 
-        <option value="rn">Rio Grande do Norte</option> 
-        <option value="ro">Rondônia</option> 
-        <option value="rs">Rio Grande do Sul</option> 
-        <option value="rr">Roraima</option> 
-        <option value="sc">Santa Catarina</option> 
-        <option value="se">Sergipe</option> 
-        <option value="sp">São Paulo</option> 
-        <option value="to">Tocantins</option> 
-        </select>
-      </label>
-      
-      <label>Cidade</label>
-      
-      <input type="password">
-     
-      <label>Email</label>
-      
-      <input type="password">
-      
-      <label>Confirmar Email</label>
-     
-      <input type="password">
-     
-      <label>Senha</label>
-     
-      <input type="password">
-      
-      <label>Confirmar Senha</label>
-      
-      <input type="password">
+      <div class="linha">
+        <label class="coluna">Senha
+          <input type="password">
+        </label>
+        <label class="coluna">Confirmar Senha
+          <input type="password">
+        </label>
+      </div>
+
       <input type="submit" id="enviar">
 
       

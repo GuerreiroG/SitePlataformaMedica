@@ -35,27 +35,71 @@ nav a:hover{
 form {
     margin-left: auto;
     margin-right: auto;
-    width: 25em;
+    width: 30em;
     text-align: center;
     background-color: rgb(255, 255, 255, 0.8);
     padding-bottom: 25px;
     border: 3px solid black;
     border-radius: 10px;
+    padding-left: 1.5em;
     
 }
 
 label{
+    text-align: left;
     margin-top: 20px;
     margin-bottom: 5px;
     color: #000000;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+select{
+    width: 12em;
+    border-radius: 5px;
+    border: solid black 2px;
+    background: white;
+    color: black;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 input{
-    width: 60%;
-    border-radius: 10px;
-    text-align: center;
+    width: 12em;
+    border-radius: 5px;
+    text-align: left;
     border: transparent;
     box-shadow: 0 0 0 0.1em black;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+input:focus{
+    width: 12.5em;
+    padding: 3px;
+    transition: 0.25s;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=submit]{
+    text-align: center;
+}
+
+input[type=submit]:hover{
+    text-align: center;
+    background-color: #015488;
+    color:white;
+    transition: 0.25s;
 }
 
 body{
@@ -65,8 +109,25 @@ body{
     
 }
 
+h1{
+    text-align: center;
+}
+
 #enviar{
     margin-top: 2.5em;
     
 }
 
+.linha{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.coluna{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    flex: 1;
+}
