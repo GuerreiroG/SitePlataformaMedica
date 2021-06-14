@@ -3,44 +3,37 @@
     --navbar-hover-color: #015488;
     --input-focus-color: #0994eb;
     --submit-hover-color: #015488;
-
 }
-
 body{
-    background-image: url(../img/bgcadastro.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
-    
 }
-
+#body_cadastro_paciente{
+    background-image: url(../img/bgcadastro.jpg);
+}
+#body_cadastro_empresa{
+    background-image: url(../img/bgempresacadastro.jpg) 
+}
 nav{
     background-color: var(--navbar-color);
 }
-
-
 ul{
     text-align: left;
 }
-
 nav li {
     list-style: none;
     display: inline-block;
     cursor: pointer;
 }
-
 .linavtexto {
     line-height: 70px;
     color: black;
-    font-style: none;
     transition: 0.25s;
-
 }
 .linavtexto:hover{
     background-color: var(--navbar-hover-color);
     transition: 0.25s;
 }
-
-
 nav a{
     color: black;
     text-decoration: none;
@@ -50,9 +43,7 @@ nav a{
 }
 nav a:hover{
     color: white;
-    
 }
-
 form {
     margin-left: auto;
     margin-right: auto;
@@ -64,9 +55,8 @@ form {
     padding-right: 1em;
     padding-left: 1em;
     border: 3px solid black;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
-
 label{
     text-align: left;
     margin-top: 20px;
@@ -75,7 +65,6 @@ label{
     margin-left: auto;
     margin-right: auto;
 }
-
 select{
     width: 12em;
     border-radius: 5px;
@@ -86,11 +75,9 @@ select{
     padding-bottom: 2px;
     outline: none;
 }
-
 select:focus{
     border: 2px solid var(--input-focus-color);
 }
-
 input{
     width: 12em;
     border-radius: 5px;
@@ -101,66 +88,68 @@ input{
     padding-top: 2px;
     padding-bottom: 2px;
 }
-
 input:focus{
     border: 2px solid var(--input-focus-color);
 }
-
 input:focus-visible{
     outline: none;
 }
-
 input[type=number] {
     -moz-appearance: textfield;
 }
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
-
 input[type=submit]{
     height: 35px;
     transition: 0.25s;
     text-align: center;
 }
-
 input[type=submit]:hover{
     text-align: center;
     background-color: var(--submit-hover-color);
     color:white;
     transition: 0.25s;
 }
-
 h1{
     text-align: center;
     margin-right: auto;
     margin-left: auto;
 }
-
 #enviar{
     margin-top: 2.2em;
-    
 }
-
-.labeldate{
-    margin-left: 7.5em;
-}
-
 .linha{
     display: flex;
     flex-direction: row;
     width: 100%;
 }
-
 .coluna{
     display: flex;
     flex-direction: column;
     flex-basis: auto;
 }
-
+.endereco{
+    margin-left: 1.4em;
+}
+.endereco>input{
+    width: 90% !important;
+}
+.complemento>input{
+    width: 82% !important;
+}
 .radiolabel{
     line-height: normal;
-    vertical-align: auto;
     margin-top: -20px;
+}
+.divsexo {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    color: #000000;
+    margin-left: auto;
+    margin-right: auto;
+}
+.labeldate{
+    margin-left: 7.5em !important;
 }
