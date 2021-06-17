@@ -6,7 +6,7 @@
 }
 body{
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-attachment: fixed
 }
 #body_cadastro_paciente{
