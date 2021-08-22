@@ -1,6 +1,7 @@
 from flask import Flask, jsonify #Sera usado para a integração web=BD
 from flask_sqlalchemy import SQLAlchemy # Importando framework
 import os #Para usar o path
+import datetime #Para usar datas
 
 #vínculo com flask
 app = Flask(__name__) 

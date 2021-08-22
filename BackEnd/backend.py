@@ -1,5 +1,6 @@
 from config import * 
 from model import Usuario
+from entidade import Entidade
 
 @app.route("/")
 def padrao():
