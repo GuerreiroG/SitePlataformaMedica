@@ -1,3 +1,8 @@
+"""Este módulo contém a classe que representa o Usuario
+
+Autor: Gustavo Guerreiro, Johannes Wachholz José e Lucas Vargas 
+"""
+
 from config import *
 
 class Usuario(db.Model):
@@ -42,8 +47,9 @@ class Usuario(db.Model):
             "data_surgimento" : self.data_surgimento
         }
 
-# comando para remover arquivo banco de dados caso já exista
+# para testar
 if __name__ == "__main__":
+    # comando para remover arquivo banco de dados caso já exista
     if os.path.exists(arquivobd):
         os.remove(arquivobd)
 
@@ -51,12 +57,12 @@ if __name__ == "__main__":
     db.create_all()
 
     # criar objetos (na memória, sem persistência)
-    p1 = Usuario(estado="SC", cidade="Blumenau", endereco="Alguma Casa",
-    complemento="Alto", cep="89037-255", telefone="992922070", email="lucasv@email.com",
-    senha="123", data_surgimento="10/10/2020") 
-    p2 = Usuario(estado="PR", cidade="Itaporoboncotoca", endereco="Meio do mato",
-    complemento="triste", cep="32076-454", telefone="85920132", email="sabrino@email.com",
-    senha="543", data_surgimento="21/40/2460")
+    p1 = Usuario(estado="SC", cidade="Blumenau", endereco="endereçoteste",
+    complemento="Alto", cep="89037-255", telefone="992922070", 
+    email="lucasv@email.com", senha="123", data_surgimento="10/10/2020") 
+    p2 = Usuario(estado="PR", cidade="Itaporobo", endereco="endereçoteste",
+    complemento="vermelho", cep="32076-454", telefone="85920132", 
+    email="sabrino@email.com", senha="543", data_surgimento="21/40/2019")
     
     # para tornar os objetos persistentes
     db.session.add(p1)

@@ -1,7 +1,11 @@
+"""Este módulo contém as principais configurações e importações.
+
+Autor: Gustavo Guerreiro, Johannes Wachholz José e Lucas Vargas 
+"""
+
 from flask import Flask, jsonify #Sera usado para a integração web=BD
 from flask_sqlalchemy import SQLAlchemy # Importando framework
 import os #Para usar o path
-import datetime #Para usar datas
 
 #vínculo com flask
 app = Flask(__name__) 
@@ -11,7 +15,7 @@ path = os.path.dirname(os.path.abspath(__file__))
 
 #concatena o caminho de cima com o nome do arquivo de banco de dados
 # caminho do arquivo config + nome arquivo bd
-arquivobd = os.path.join(path, 'testemodelo.db')
+arquivobd = os.path.join(path, 'testeDB.db')
 
 #diz onde o banco de dado vai ser criado
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///"+arquivobd

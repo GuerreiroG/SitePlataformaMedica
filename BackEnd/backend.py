@@ -1,3 +1,8 @@
+"""Este módulo contém o backend
+
+Autor: Gustavo Guerreiro, Johannes Wachholz José e Lucas Vargas 
+"""
+
 from config import * 
 from model import Usuario
 from entidade import Entidade
@@ -17,8 +22,7 @@ def listar_usuarios():
 	resposta = jsonify(retorno)
 	return resposta
 
-#no CMD, curl localhost:5000/listar_usuarios para testar
+# no CMD, curl localhost:5000/listar_usuarios para testar
 
-#Isso faz o server rodar
-#o debug faz com que renicie toda vez que salvar.
+# faz com que renicie toda vez que salvar.
 app.run(debug = True)
