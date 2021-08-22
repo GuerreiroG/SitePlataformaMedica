@@ -1,6 +1,7 @@
 from config import * 
 from model import Usuario
 from entidade import Entidade
+from medico import Medico
 
 @app.route("/")
 def padrao():
@@ -14,7 +15,8 @@ def listar_usuarios():
 		retorno.append(p.json())
 	resposta = jsonify(retorno)
 	return resposta
-#no Gitbash, curl localhost:5000/listar_usuarios para testar
+
+#no CMD, curl localhost:5000/listar_usuarios para testar
 
 #Isso faz o server rodar
 #o debug faz com que renicie toda vez que salvar.
