@@ -67,10 +67,12 @@ if __name__ == "__main__":
     db.session.commit()
     
     # exibe os objetos de Entidade
-    print("---------------")
+    print("-------TESTE P1--------")
     print(p1)
+    print("---")
     print(p1.json())
-    print("-----------------------")
+    print("-------TESTE P2----------------")
     print(p2)
+    print("---")
     print(p2.json())
     print("---------------")
