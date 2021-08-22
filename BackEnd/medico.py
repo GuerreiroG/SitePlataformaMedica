@@ -15,6 +15,7 @@ class Medico(Usuario):
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
     area_atuacao = db.Column(db.String(254))
     cpf = db.Column(db.String(254))
+    sexo = db.Column(db.String(254))
 
     # atributo de chave estrangeira
     id_entidade = db.Column(db.Integer, db.ForeignKey('entidade.id'), nullable=False)
@@ -46,6 +47,7 @@ class Medico(Usuario):
         return super().json() | {
             "area_atuacao" : self.area_atuacao,
             "cpf" : self.cpf,
+            "sexo" : self.sexo,
             "id_entidade" : self.id_entidade,
             "entidade" : self.entidade.json(),
         }
@@ -71,7 +73,8 @@ if __name__ == "__main__":
     test1 = Medico(estado="RS", cidade="Porto Triste", 
     endereco="Algum Apartamento", complemento="Baixo", cep="55555-955",
     telefone="47888888888", email="gustavog@email.com", senha="321",
-    data_surgimento="11/11/2011", area_atuacao="Urologia", cpf="989.654.258-89" id_entidade="1")
+    data_surgimento="11/11/2011", area_atuacao="Urologia", sexo="Masculino",
+    cpf="989.654.258-89", id_entidade="1")
     
     # torna os objetos persistentes
     db.session.add(entidade_teste)
