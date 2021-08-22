@@ -13,9 +13,10 @@ class Medico(Usuario):
     """
     # atributos exclusivos do médico
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
+    nome_medico = db.Column(db.String(254))
     area_atuacao = db.Column(db.String(254))
-    cpf = db.Column(db.String(254))
-    sexo = db.Column(db.String(254))
+    cpf_medico = db.Column(db.String(254))
+    sexo_medico = db.Column(db.String(254))
 
     # atributo de chave estrangeira
     id_entidade = db.Column(db.Integer, db.ForeignKey('entidade.id'), nullable=False)
@@ -35,8 +36,9 @@ class Medico(Usuario):
         Returns:
             (str): string adicionando a area de atuacao do medico ao dicionario
         """
-        return super().__str__() + f'{self.id_entidade}', +\
-            f'{self.entidade}',f'{self.area_atuacao}'
+        return super().__str__() + f', {self.nome_medico}, ' +\
+        f'{self.cpf_medico}, {self.sexo_medico}, ' +\
+        f'{self.area_atuacao}, {self.id_entidade}, {self.entidade}'
     
     def json(self):
         """Adiciona area_atuacao ao return do json do Usuario
@@ -45,9 +47,10 @@ class Medico(Usuario):
             (dict): dicionário json com a area de atuação inclusa
         """
         return super().json() | {
+            "nome_medico" : self.nome_medico,
             "area_atuacao" : self.area_atuacao,
-            "cpf" : self.cpf,
-            "sexo" : self.sexo,
+            "cpf_medico" : self.cpf_medico,
+            "sexo_medico" : self.sexo_medico,
             "id_entidade" : self.id_entidade,
             "entidade" : self.entidade.json(),
         }
@@ -73,8 +76,8 @@ if __name__ == "__main__":
     test1 = Medico(estado="RS", cidade="Porto Triste", 
     endereco="Algum Apartamento", complemento="Baixo", cep="55555-955",
     telefone="47888888888", email="gustavog@email.com", senha="321",
-    data_surgimento="11/11/2011", area_atuacao="Urologia", sexo="Masculino",
-    cpf="989.654.258-89", id_entidade="1")
+    data_surgimento="11/11/2011", nome_medico="Jorge", area_atuacao="Urologia",
+    sexo_medico="Masculino", cpf_medico="989.654.258-89", id_entidade="1")
     
     # torna os objetos persistentes
     db.session.add(entidade_teste)
