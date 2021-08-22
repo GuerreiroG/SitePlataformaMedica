@@ -2,6 +2,7 @@ from config import *
 from model import Usuario
 from entidade import Entidade
 from medico import Medico
+from paciente import Paciente
 
 @app.route("/")
 def padrao():
