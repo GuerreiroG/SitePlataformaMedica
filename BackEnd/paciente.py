@@ -41,15 +41,15 @@ if __name__ == "__main__":
     db.create_all()
 
     # criar objetos (na memória, sem persistência)
-    p1 = Paciente(estado="SC", cidade="Blumenau", endereco="Alguma Casa",
-    complemento="Alto", cep="89037-255", telefone="992922070", email="lucasv@email.com",
-    senha="123", data_surgimento="10/10/2020", nome_completo="bananinha", sexo="coca-cola", 
-    cpf=11111111111, alergias="sol") 
+    p1 = Paciente(estado="SC", cidade="Pomerode", endereco="Rua Hermann Weege",
+    complemento="casa", cep="89107-000", telefone="992922070", email="joao8856@email.com",
+    senha="senha123", data_surgimento="11/06/2002", nome_completo="João Machado", sexo="Masculino", 
+    cpf=16465232154, alergias="poeira") 
     
-    p2 = Paciente(estado="PR", cidade="Itaporoboncotoca", endereco="Meio do mato",
-    complemento="triste", cep="32076-454", telefone="85920132", email="sabrino@email.com",
-    senha="543", data_surgimento="21/40/2460", nome_completo="chocolate", sexo="paozinho", 
-    cpf=22222222222, alergias="Orogotango")
+    p2 = Paciente(estado="SC", cidade="Blumenau", endereco="Rua Itajaí",
+    complemento="Apartamento", cep="12512000", telefone="994210500", email="amanda5521@gmail.com",
+    senha="amanda2251", data_surgimento="21/04/1997", nome_completo="Amanda da Silva", sexo="Feminino", 
+    cpf=52145561244, alergias="polém")
     
     # para tornar os objetos persistentes
     db.session.add(p1)
