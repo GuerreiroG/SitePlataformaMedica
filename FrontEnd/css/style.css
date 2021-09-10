@@ -15,6 +15,9 @@ body{
 #body_cadastro_empresa{
     background-image: url(../img/bgempresacadastro.jpg) 
 }
+#body_cadastro_medico{
+    background-image: url(../img/bgcadastromedico.jpg)
+}
 nav{
     background-color: var(--navbar-color);
 }
