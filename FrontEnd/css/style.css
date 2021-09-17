@@ -7,17 +7,25 @@
 body{
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed
+    background-attachment: fixed;
 }
+
+#body_login{
+    background-image: url(../img/bglogin.jpg)
+}
+
 #body_cadastro_paciente{
-    background-image: url(../img/bgcadastro.jpg);
+    background-image: url(../img/bgcadastro.jpg);    
 }
+
 #body_cadastro_empresa{
-    background-image: url(../img/bgempresacadastro.jpg) 
+    background-image: url(../img/bgempresacadastro.jpg);
 }
+
 #body_cadastro_medico{
-    background-image: url(../img/bgcadastromedico.jpg)
+    background-image: url(../img/bgcadastromedico.jpg);
 }
+
 #titulo_homepage{
     font-family: 'Roboto';
     text-align: center;
@@ -188,4 +196,23 @@ h1{
 #link_cadastro{
     display: block;
     margin-top: .4em;
+}
+
+.login-modal{
+    display: block;
+    text-align: center;
+}
+
+.login-modal a{
+    margin-top: 10px;
+    border-color: black;
+    color: black;
+    width: 15em;
+    border-width: 2px;
+}
+
+.login-modal a:hover,
+.login-modal a:focus{
+    background-color: rgb(1, 84, 136);
+    border-color: black;
 }
