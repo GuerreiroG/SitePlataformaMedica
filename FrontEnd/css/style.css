@@ -18,6 +18,32 @@ body{
 #body_cadastro_medico{
     background-image: url(../img/bgcadastromedico.jpg)
 }
+#titulo_homepage{
+    font-family: 'Roboto';
+    text-align: center;
+    font-size: 75px;
+    margin-bottom: .5em;
+}
+#texto1_homepage{
+    font-family: 'Roboto';
+    line-height: 1.5em;
+    font-size: 25px;
+}
+#banner_homepage{
+    background-image: url(../img/banner_home.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 8em;
+}
+#botao_cadastro_homepage{
+    width: 10em;
+    font-size: 25px;
+    margin-top: 2em;
+    background-color: #015488;
+}
+#botao_cadastro_homepage:hover{
+    background-color: #004680;
+}
 nav{
     background-color: var(--navbar-color);
 }
