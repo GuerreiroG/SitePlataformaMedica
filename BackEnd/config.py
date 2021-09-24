@@ -2,13 +2,12 @@
 
 Autor: Gustavo Guerreiro, Johannes Wachholz José e Lucas Vargas 
 """
-
-from flask import Flask, jsonify #Sera usado para a integração web=BD
+from flask import Flask, jsonify, request #Sera usado para a integração web=BD
 from flask_sqlalchemy import SQLAlchemy # Importando framework
 import os #Para usar o path
 
 #vínculo com flask
-app = Flask(__name__) 
+app = Flask(__name__)
 
 #pega o NOME do diretório do arquivo em si (config)
 path = os.path.dirname(os.path.abspath(__file__)) 
@@ -23,4 +22,3 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///"+arquivobd
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #vínculo que sera utilizado para a criação da classe
 db = SQLAlchemy(app) 
-

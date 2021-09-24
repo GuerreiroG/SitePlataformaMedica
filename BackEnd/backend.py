@@ -23,6 +23,21 @@ def listar_usuarios():
 	resposta.headers.add("Access-Control-Allow-Origin", "*")
 	return resposta
 
+@app.route("/incluir_instituicao", methods=['post']) 
+def incluir_instituicao(): 
+   	# preparar uma resposta otimista 
+   	resposta = jsonify({"resultado": "ok", "detalhes": "ok"}) 
+   	# receber as informações da nova pessoa 
+   	dados = request.get_json() #(force=True) dispensa Content-Type na requisição 
+   	try: # tentar executar a operação 
+		   nova = Entidade(**dados)
+		   db.session.add(nova) # adicionar no BD 
+		   db.session.commit() # efetivar a operação de gravação 
+   	except Exception as e: 
+		   resposta = jsonify({"resultado":"erro", "detalhes":str(e)})
+		   resposta.headers.add("Access-Control-Allow-Origin", "*") 
+   	return resposta # responder! 
+
 # no CMD, curl localhost:5000/listar_usuarios para testar
 
 # faz com que renicie toda vez que salvar.
