@@ -20,6 +20,7 @@ def listar_usuarios():
 	for p in usuarios:
 		retorno.append(p.json())
 	resposta = jsonify(retorno)
+	resposta.headers.add("Access-Control-Allow-Origin", "*")
 	return resposta
 
 # no CMD, curl localhost:5000/listar_usuarios para testar
