@@ -44,8 +44,10 @@ $( document ).on("click", "enviar"), function() {
         contentType: 'application/json', // tipo dos dados enviados 
         data: dados, // estes são os dados enviados 
         success: pessoaIncluida, // chama a função listar para processar o resultado 
-        error: erroAoIncluir 
+        error: erroAoIncluir
+    })
 }
+
 function pessoaIncluida (retorno) { 
     if (retorno.resultado == "ok") {
         alert("Pessoa incluída com sucesso!"); 
@@ -56,6 +58,7 @@ function pessoaIncluida (retorno) {
         alert(retorno.resultado + ":" + retorno.detalhes); 
     } 
 } 
+
 function erroAoIncluir (retorno) { 
     alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes); 
 }
