@@ -31,12 +31,11 @@ $( document ).ready(function() {
 
     $("#enviar").click(function(){
         // pegar os dados do formulario
-        console.log('eaeaeaeae')
         nome = $("#campoNomeFantasia").val();
         email = $("#campoEmail").val();
         tel = $("#campoTelefone").val();
         // preparar os dados recebidos para o formato json
-        var dados = JSON.stringify({ nome: nome, email: email, telefone: tel }); 
+        var dados = JSON.stringify({ nome_fantasia: nome, email: email, telefone: tel }); 
         $.ajax({ 
             url: 'http://localhost:5000/incluir_instituicao', 
             type: 'POST', 
@@ -51,7 +50,7 @@ $( document ).ready(function() {
     function pessoaIncluida (retorno) { 
         if (retorno.resultado == "ok") {
             alert("Pessoa incluída com sucesso!"); 
-            $("#campoNome").val(""); 
+            $("#campoNomeFantasia").val(""); 
             $("#campoEmail").val(""); 
             $("#campoTelefone").val(""); 
         } else {
