@@ -5,9 +5,11 @@ Autor: Gustavo Guerreiro, Johannes Wachholz José e Lucas Vargas
 from flask import Flask, jsonify, request #Sera usado para a integração web=BD
 from flask_sqlalchemy import SQLAlchemy # Importando framework
 import os #Para usar o path
+from flask_cors import CORS
 
 #vínculo com flask
 app = Flask(__name__)
+CORS(app)
 
 #pega o NOME do diretório do arquivo em si (config)
 path = os.path.dirname(os.path.abspath(__file__)) 

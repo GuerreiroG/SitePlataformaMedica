@@ -26,6 +26,8 @@ def listar_usuarios():
     return resposta
 
 
+
+#teste da rota: curl -d '{"nome_fantasia":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_instituicao
 @app.route("/incluir_instituicao", methods=['post'])
 def incluir_instituicao():
     # preparar uma resposta otimista
@@ -33,7 +35,7 @@ def incluir_instituicao():
     # receber as informações da nova pessoa
     dados = request.get_json() #(force=True) dispensa Content-Type na requisição
     try: # tentar executar a operação
-      nova = Instituicao(**dados) # criar a nova pessoa
+      nova = Entidade(**dados) # criar a nova pessoa
       db.session.add(nova) # adicionar no BD
       db.session.commit() # efetivar a operação de gravação
     except Exception as e: # em caso de erro...
@@ -42,6 +44,9 @@ def incluir_instituicao():
     # adicionar cabeçalho de liberação de origem
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta # responder!
+
+
+
 # no CMD, curl localhost:5000/listar_usuarios para testar
 
 

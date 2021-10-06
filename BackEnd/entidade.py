@@ -30,13 +30,15 @@ class Entidade(Usuario):
 
     # método para dar return nas informações no padrão json
     def json(self):
-        return super().json() | {
+        json1 = super().json()  
+        json1.update({
             "nome_fantasia" : self.nome_fantasia,
             "razao_social" : self.razao_social,
             "numero_funcionarios" : self.numero_funcionarios,
             "tipo_instituicao" : self.tipo_instituicao,
             "cnpj" : self.cnpj,
-        }
+        })
+        return json1
 
 # para testar a classe
 if __name__ == "__main__":
