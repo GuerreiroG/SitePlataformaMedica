@@ -25,6 +25,9 @@ body{
 #body_cadastro_medico{
     background-image: url(../img/bgcadastromedico.jpg);
 }
+#body_perfil_instituicao{
+    background-color: #ebf0f7;
+}
 
 #titulo_homepage{
     font-family: 'Roboto';
@@ -83,6 +86,12 @@ body{
 }
 #botao_cadastro_homepage:hover{
     background-color: #004680;
+}
+#perfil_instituicao{
+    margin: 5em;
+    padding: 2em;
+    background-color: white;
+    border: 5px solid black;
 }
 nav{
     background-color: var(--navbar-color);
@@ -189,6 +198,23 @@ h1{
 }
 #enviar{
     margin-top: 1.5em;
+}
+.foto_perfil{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 5px solid black;
+    display: block;
+    display: inline;
+}
+.dados_perfil{
+    margin-left: 3em;
+}
+.elementos_perfil{
+    font-weight: normal;
+    line-height: 2em;
+    text-decoration: none;
+    font-size: 30px;
 }
 .linha{
     display: flex;
