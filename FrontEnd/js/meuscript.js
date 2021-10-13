@@ -1,32 +1,30 @@
 $( document ).ready(function() {
     
     $("#listar").click(function(){
-        
+        let id_usuario = 1;
+
         $.ajax({
-            url: 'http://localhost:5000/listar_usuarios',
+            url: 'http://localhost:5000/exibir_usuario/'+id_usuario,
             method: 'GET',
             dataType: 'json', // os dados são recebidos no formato json
-            success: listar_usuarios, // chama a função listar_usuarios para processar o resultado
+            success: exibir_usuario, // chama a função exibir_usuario para processar o resultado
             error: function() {
                 alert("erro ao ler dados, verifique o backend");
             }
         });
-        function listar_usuarios(usuarios) {
-        
-            // percorrer as usuarios retornadas em json
-            for (var i in usuarios) {
-
-              // montar uma linha da tabela de usuarios
-              lin =  usuarios[i].email + ", " + 
-                usuarios[i].telefone + ", " +
-                usuarios[i].endereco + "<br>";
-
-                // colocar as linhas na tabela
-                $("#dados").append(lin);
-            }
+        function exibir_usuario(usuario) {
             
-        }
+            console.log('oi');
+            
+            // montar uma linha da tabela de usuarios
+            lin = usuario.cep;
 
+            console.log(usuario[0].cep);
+
+            // colocar as linhas na tabela
+            $("#dados").append(lin);
+
+            }
     });
 
     $("#enviar").click(function(){
@@ -34,6 +32,7 @@ $( document ).ready(function() {
         nome = $("#campoNomeFantasia").val();
         email = $("#campoEmail").val();
         tel = $("#campoTelefone").val();
+  
         // preparar os dados recebidos para o formato json
         var dados = JSON.stringify({ nome_fantasia: nome, email: email, telefone: tel }); 
         $.ajax({ 

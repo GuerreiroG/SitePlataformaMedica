@@ -15,17 +15,15 @@ def padrao():
     return "backend operante"
 
 
-@app.route("/listar_usuarios")
-def listar_usuarios():
-    usuarios = db.session.query(Usuario).all()
+
+@app.route("/exibir_usuario/<int:usuario_id>")
+def listar_usuario(usuario_id):
+    usuarios = db.session.query(Usuario).filter(Usuario.id == usuario_id)
     retorno = []
-    for p in usuarios:
-        retorno.append(p.json())
+    retorno.append(usuarios[0].json())
     resposta = jsonify(retorno)
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
-
-
 
 #teste da rota: curl -d '{"nome_fantasia":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_instituicao
 @app.route("/incluir_instituicao", methods=['post'])
