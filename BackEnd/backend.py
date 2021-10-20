@@ -15,6 +15,16 @@ def padrao():
     return "backend operante"
 
 
+@app.route("/listar_usuarios")
+def listar_usuarios():
+	usuarios = db.session.query(Usuario).all()
+	retorno = []
+	for p in usuarios:
+		retorno.append(p.json())
+	resposta = jsonify(retorno)
+	resposta.headers.add("Access-Control-Allow-Origin", "*")
+	return resposta
+
 
 @app.route("/exibir_usuario/<int:usuario_id>")
 def listar_usuario(usuario_id):
