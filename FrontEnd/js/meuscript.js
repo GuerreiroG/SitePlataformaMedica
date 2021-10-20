@@ -14,15 +14,18 @@ $( document ).ready(function() {
         });
         function exibir_usuario(usuario) {
             
-            console.log('oi');
-            
             // montar uma linha da tabela de usuarios
-            lin = usuario.cep;
+            const lista_dados = [usuario[0].razao_social, usuario[0].cidade + "/" + usuario[0].estado,  
+            usuario[0].endereco, usuario[0].cep, usuario[0].telefone, usuario[0].email, usuario[0].data_surgimento,
+            usuario[0].tipo_instituicao];
+            var linha = '<h1>' + usuario[0].nome_fantasia + '</h1>';
 
-            console.log(usuario[0].cep);
+            for (var i in lista_dados) {
+                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
+                linha = linha + lin
+            };
 
-            // colocar as linhas na tabela
-            $("#dados").append(lin);
+            $("#inf_instituicao").append(linha);
 
             }
     });

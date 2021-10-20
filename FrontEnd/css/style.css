@@ -215,6 +215,7 @@ h1{
     line-height: 2em;
     text-decoration: none;
     font-size: 30px;
+    display: block;
 }
 .linha{
     display: flex;
