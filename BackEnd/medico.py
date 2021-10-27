@@ -46,14 +46,16 @@ class Medico(Usuario):
         Returns:
             (dict): dicionário json com a area de atuação inclusa
         """
-        return super().json() | {
+        json1 = super().json()  
+        json1.update({
             "nome_medico" : self.nome_medico,
             "area_atuacao" : self.area_atuacao,
             "cpf_medico" : self.cpf_medico,
             "sexo_medico" : self.sexo_medico,
             "id_entidade" : self.id_entidade,
             "entidade" : self.entidade.json(),
-        }
+        })
+        return json1
 
 # parte de teste da classe
 if __name__ == "__main__":
