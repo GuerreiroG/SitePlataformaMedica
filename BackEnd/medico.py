@@ -6,7 +6,7 @@ Autor: Gustavo Guerreiro.
 """
 from config import *
 from model import Usuario
-from entidade import Entidade
+from instituicao import Instituicao
 
 class Medico(Usuario):
     """Classe que representa um médico no site
@@ -19,10 +19,10 @@ class Medico(Usuario):
     sexo_medico = db.Column(db.String(254))
 
     # atributo de chave estrangeira
-    id_entidade = db.Column(db.Integer, db.ForeignKey('entidade.id'), nullable=False)
+    id_instituicao = db.Column(db.Integer, db.ForeignKey('instituicao.id'), nullable=False)
     
     # atributo de relacionamento
-    entidade = db.relationship("Entidade", foreign_keys=[id_entidade])
+    instituicao = db.relationship("Instituicao", foreign_keys=[id_instituicao])
 
     # definindo indentidade polimórfica que ficará armazenada na classe pai
     # no campo type
@@ -38,7 +38,7 @@ class Medico(Usuario):
         """
         return super().__str__() + f', {self.nome_medico}, ' +\
         f'{self.cpf_medico}, {self.sexo_medico}, ' +\
-        f'{self.area_atuacao}, {self.id_entidade}, {self.entidade}'
+        f'{self.area_atuacao}, {self.id_instituicao}, {self.instituicao}'
     
     def json(self):
         """Adiciona area_atuacao ao return do json do Usuario
@@ -52,8 +52,8 @@ class Medico(Usuario):
             "area_atuacao" : self.area_atuacao,
             "cpf_medico" : self.cpf_medico,
             "sexo_medico" : self.sexo_medico,
-            "id_entidade" : self.id_entidade,
-            "entidade" : self.entidade.json(),
+            "id_instituicao" : self.id_instituicao,
+            "instituicao" : self.instituicao.json(),
         })
         return json1
 
@@ -66,8 +66,8 @@ if __name__ == "__main__":
     # comando cria uma tabela
     db.create_all()
 
-    # criando instancia de entidade para fazer o teste do médico
-    entidade_teste = Entidade(estado="SC", cidade="Blumenau",
+    # criando instancia de instituicao para fazer o teste do médico
+    instituicao_teste = Instituicao(estado="SC", cidade="Blumenau",
     endereco="Alguma Casa", complemento="Alto", cep="89037-255",
     telefone="992922070", email="lucasv@email.com", senha="123",
     data_surgimento="10/10/2020", nome_fantasia="bananinha",
@@ -79,15 +79,15 @@ if __name__ == "__main__":
     endereco="Algum Apartamento", complemento="Baixo", cep="55555-955",
     telefone="47888888888", email="gustavog@email.com", senha="321",
     data_surgimento="11/11/2011", nome_medico="Jorge", area_atuacao="Urologia",
-    sexo_medico="Masculino", cpf_medico="989.654.258-89", id_entidade="1")
+    sexo_medico="Masculino", cpf_medico="989.654.258-89", id_instituicao="1")
     
     # torna os objetos persistentes
-    db.session.add(entidade_teste)
+    db.session.add(instituicao_teste)
     db.session.add(test1)
     db.session.commit()
 
     # exibe o médico
     print(test1.json())
     print("================================================")
-    # acessa o nome fantasia da entidade por meio do médico
-    print(test1.entidade.nome_fantasia)
+    # acessa o nome fantasia da instituicao por meio do médico
+    print(test1.instituicao.nome_fantasia)

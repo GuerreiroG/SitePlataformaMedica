@@ -5,7 +5,7 @@ Autor: Gustavo Guerreiro, Johannes Wachholz José e Lucas Vargas
 
 from config import *
 from model import Usuario
-from entidade import Entidade
+from instituicao import Instituicao
 from medico import Medico
 from paciente import Paciente
 
@@ -43,7 +43,7 @@ def incluir_instituicao():
     # receber as informações da nova pessoa
     dados = request.get_json() #(force=True) dispensa Content-Type na requisição
     try: # tentar executar a operação
-      nova = Entidade(**dados) # criar a nova pessoa
+      nova = Instituicao(**dados) # criar a nova pessoa
       db.session.add(nova) # adicionar no BD
       db.session.commit() # efetivar a operação de gravação
     except Exception as e: # em caso de erro...
