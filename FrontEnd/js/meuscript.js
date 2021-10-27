@@ -32,12 +32,41 @@ $( document ).ready(function() {
 
     $("#enviar").click(function(){
         // pegar os dados do formulario
-        nome = $("#campoNomeFantasia").val();
+        surgimento = $("#campoSurgimento").val();
+        estado = $("#campoEstado").val();
+        cidade = $("#campoCidade").val();
+        endereco = $("#campoEndereco").val();
+        complemento = $("#campoComplemento").val();
+        cep = $("#campoCEP").val();
+        senha = $("#campoSenha").val();
+        senha_confirm = $("#campoConfirmarSenha").val();
         email = $("#campoEmail").val();
+        email_confirm = $("#campoConfirmarEmail").val();
         tel = $("#campoTelefone").val();
-  
+        var dadosGerais = {estado: estado, cidade: cidade, endereco: endereco,
+        complemento: complemento, cep: cep, telefone: tel, email: email, senha: senha, 
+        data_surgimento: surgimento}; 
+
+        // Se for instituicao:
+        if ($("#campoRazaoSocial").val() != "") {
+            razao_social = $("#campoRazaoSocial").val();
+            nome_fantasia = $("#campoNomeFantasia").val();
+            tipo_instituicao = $("campoTipoInstituicao").val();
+            numero_funcionarios = $("campoNumeroFuncionariuos").val();
+            cnpj = $("#campoCNPJ").val();
+            let dadosInstituicao = JSON.stringify({nome_fantasia: nome_fantasia, 
+            razao_social: razao_social, numero_funcionarios: numero_funcionarios,
+            tipo_instituicao: tipo_instituicao, cnpj: cnpj});
+            var dados = Object.assign({}, dadosGerais, dadosInstituicao); 
+
+        // Se for Paciente:
+        //......
+
+        // Se for Medico:
+        //......
+        }
+         
         // preparar os dados recebidos para o formato json
-        var dados = JSON.stringify({ nome_fantasia: nome, email: email, telefone: tel }); 
         $.ajax({ 
             url: 'http://localhost:5000/incluir_instituicao', 
             type: 'POST', 
@@ -47,6 +76,7 @@ $( document ).ready(function() {
             success: pessoaIncluida, // chama a função listar para processar o resultado 
             error: erroAoIncluir
         })
+
     });
 
     function pessoaIncluida (retorno) { 
