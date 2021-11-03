@@ -51,21 +51,41 @@ $( document ).ready(function() {
         if ($("#campoRazaoSocial").val() != "") {
             razao_social = $("#campoRazaoSocial").val();
             nome_fantasia = $("#campoNomeFantasia").val();
-            tipo_instituicao = $("campoTipoInstituicao").val();
-            numero_funcionarios = $("campoNumeroFuncionariuos").val();
+            tipo_instituicao = $("#campoTipoInstituicao").val();
+            numero_funcionarios = $("#campoNumeroFuncionariuos").val();
             cnpj = $("#campoCNPJ").val();
-            let dadosInstituicao = JSON.stringify({nome_fantasia: nome_fantasia, 
+            let dadosInstituicao = {nome_fantasia: nome_fantasia, 
             razao_social: razao_social, numero_funcionarios: numero_funcionarios,
-            tipo_instituicao: tipo_instituicao, cnpj: cnpj});
+            tipo_instituicao: tipo_instituicao, cnpj: cnpj};
             var dados = Object.assign({}, dadosGerais, dadosInstituicao); 
+            dados = JSON.stringify(dados);
 
-        // Se for Paciente:
-        //......
-
-        // Se for Medico:
-        //......
+        // Se for médico
+        } else if ($("#campoEspecialidade").val() != "") {
+            nome_medico = $("#campoNomeCompleto").val();
+            especialidade= $("#campoEspecialidade").val();
+            cpf_medico = $("#campoCPF").val();
+            sexo_medico = $("[name='sexo']");
+            cnpj_instituicao = $("#campoCNPJ").val();
+            status_medico = $("#campoStatus").val();
+            let dadosMedico = {nome_medico: nome_medico, especialidade: especialidade,
+            cpf_medico: cpf_medico, sexo_medico: sexo_medico, 
+            cnpj_instituicao: cnpj_instituicao, status_medico: status_medico}
+            var dados = Object.assign({}, dadosGerais, dadosMedico);
+            dados = JSON.stringify(dados);
+        
+        // Se for paciente
+        } else {
+            nome_completo = $("#campoNomeCompleto").val();
+            sexo = $("[name='sexo']");
+            cpf = $("#campoCPF").val();
+            alergias = $("#campoAlergia").val();
+            let dadosPaciente = {nome_completo: nomecompleto, sexo: sexo,
+            cpf: cpf};
+            var dados = Object.assign({}, dadosGerais, dadosPaciente);
+            dados = JSON.stringify(dados);
         }
-         
+
         // preparar os dados recebidos para o formato json
         $.ajax({ 
             url: 'http://localhost:5000/incluir_instituicao', 
@@ -82,9 +102,36 @@ $( document ).ready(function() {
     function pessoaIncluida (retorno) { 
         if (retorno.resultado == "ok") {
             alert("Pessoa incluída com sucesso!"); 
-            $("#campoNomeFantasia").val(""); 
-            $("#campoEmail").val(""); 
-            $("#campoTelefone").val(""); 
+            $("#campoSurgimento").val();
+            $("#campoEstado").val();
+            $("#campoCidade").val();
+            $("#campoEndereco").val();
+            $("#campoComplemento").val();
+            $("#campoCEP").val();
+            $("#campoSenha").val();
+            $("#campoConfirmarSenha").val();
+            $("#campoEmail").val();
+            $("#campoConfirmarEmail").val();
+            $("#campoTelefone").val();
+
+            if ($("#campoRazaoSocial").val() != "") {
+                $("#campoRazaoSocial").val();
+                $("#campoNomeFantasia").val();
+                $("#campoTipoInstituicao").val();
+                $("#campoNumeroFuncionariuos").val();
+                $("#campoCNPJ").val();
+            } else if ($("#campoEspecialidade").val() != "") {
+                $("#campoNomeCompleto").val();
+                $("#campoEspecialidade").val();
+                $("#campoCPF").val();
+                $("#campoCNPJ").val();
+                $("#campoStatus").val();
+            } else {
+                $("#campoNomeCompleto").val();
+                $("#campoCPF").val();
+                $("#campoAlergia").val();
+            }
+            
         } else {
             alert(retorno.resultado + ":" + retorno.detalhes); 
         } 
