@@ -84,7 +84,8 @@ if __name__ == "__main__":
     endereco="Algum Apartamento", complemento="Baixo", cep="55555-955",
     telefone="47888888888", email="gustavog@email.com", senha="321",
     data_surgimento="11/11/2011", nome_medico="Jorge", especialidade="Urologia",
-    sexo_medico="Masculino", cpf_medico="989.654.258-89", id_instituicao="1")
+    sexo_medico="Masculino", cpf_medico="989.654.258-89", id_instituicao="1",
+    cnpj_instituicao="999999999999", status_medico="Ativo")
     
     # torna os objetos persistentes
     db.session.add(instituicao_teste)
