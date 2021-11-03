@@ -14,7 +14,7 @@ class Medico(Usuario):
     # atributos exclusivos do médico
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
     nome_medico = db.Column(db.String(254))
-    area_atuacao = db.Column(db.String(254))
+    especialidade = db.Column(db.String(254))
     cpf_medico = db.Column(db.String(254))
     sexo_medico = db.Column(db.String(254))
 
@@ -38,10 +38,10 @@ class Medico(Usuario):
         """
         return super().__str__() + f', {self.nome_medico}, ' +\
         f'{self.cpf_medico}, {self.sexo_medico}, ' +\
-        f'{self.area_atuacao}, {self.id_instituicao}, {self.instituicao}'
+        f'{self.especialidade}, {self.id_instituicao}, {self.instituicao}'
     
     def json(self):
-        """Adiciona area_atuacao ao return do json do Usuario
+        """Adiciona especialidade ao return do json do Usuario
 
         Returns:
             (dict): dicionário json com a area de atuação inclusa
@@ -49,7 +49,7 @@ class Medico(Usuario):
         json1 = super().json()  
         json1.update({
             "nome_medico" : self.nome_medico,
-            "area_atuacao" : self.area_atuacao,
+            "especialidade" : self.especialidade,
             "cpf_medico" : self.cpf_medico,
             "sexo_medico" : self.sexo_medico,
             "id_instituicao" : self.id_instituicao,
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     test1 = Medico(estado="RS", cidade="Porto Triste", 
     endereco="Algum Apartamento", complemento="Baixo", cep="55555-955",
     telefone="47888888888", email="gustavog@email.com", senha="321",
-    data_surgimento="11/11/2011", nome_medico="Jorge", area_atuacao="Urologia",
+    data_surgimento="11/11/2011", nome_medico="Jorge", especialidade="Urologia",
     sexo_medico="Masculino", cpf_medico="989.654.258-89", id_instituicao="1")
     
     # torna os objetos persistentes

@@ -32,16 +32,16 @@
             </div>
             <div class="linha">
                <label class="coluna">Nome Completo:
-               <input type="text" required>
+               <input type="text" id="campoNomeCompleto" required>
                </label>
-               <label class="coluna">CPF:
-               <input type="number" required>
+               <label class="coluna">CPF (apenas números):
+               <input type="number" id="campoCPF" required>
                </label>
             </div>
             <div class="linha">
                <label class="coluna">
                   Estado:
-                  <select name="estado" required>
+                  <select name="estado" id="campoEstado" required>
                      <option value="">Selecione um estado</option>
                      <option value="ac">Acre</option>
                      <option value="al">Alagoas</option>
@@ -73,43 +73,43 @@
                   </select>
                </label>
                <label class="coluna">Cidade:
-               <input type="text" required>
+               <input type="text" id="campoCidade" required>
                </label>
             </div>
             <div class="linha">
                <label class="coluna endereco col-8" >Endereço:
-               <input type="text" required placeholder="Rua/Avenida, Número, Bairro"> 
+               <input type="text" id="campoEndereco" required placeholder="Rua/Avenida, Número, Bairro"> 
                </label>
                <label class="coluna complemento">Complemento:
-               <input type="text">
+               <input type="text" id="campoComplemento">
                </label>
             </div>
             <div class="linha">
-               <label class="coluna" >CEP:
-               <input type="number" required> 
+               <label class="coluna" >CEP (apenas números):
+               <input type="number" id="campoCEP" required> 
                </label>
-               <label class="coluna">Telefone:
-               <input type="number" required>
+               <label class="coluna">Telefone (apenas números):
+               <input type="number" id="campoTelefone" required>
                </label>
             </div>
             <div class="linha">
                <label class="coluna">Email:
-               <input type="email" required>
+               <input type="email" id="campoEmail" required>
                </label>
                <label class="coluna">Confirmar Email:
-               <input type="email" required>
+               <input type="email" id="campoConfirmarEmail" required>
                </label>
             </div>
             <div class="linha">
                <label class="coluna">Senha:
-               <input type="password" required>
+               <input type="password" id="campoSenha" required>
                </label>
                <label class="coluna">Confirmar Senha:
-               <input type="password" required>
+               <input type="password" id="campoConfirmarSenha" required>
                </label>
             </div>
             <div class="linha">
-               <div class="coluna divsexo">
+               <div class="coluna divradio">
                   Sexo:
                   <div class="form-check">
                      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" required="">
@@ -125,24 +125,24 @@
                   </div>
                </div>
                <label class="coluna labeldate"> Data de Nascimento:
-               <input type="date" required>
+               <input type="date" id="campoSurgimento" required>
                </label>
             </div>
             <div class="linha">
                 <label class="coluna">Status:
-                    <select name="status" required>
+                    <select name="status" id="campoStatus" required>
                        <option value="">Selecione um status</option>
                        <option value="ativo">Ativo</option>
                        <option value="inoperante">Inoperante</option>
                     </select>
                 </label>
-                <label class="coluna">CNEP da Instituição:
-                <input type="number" required>
+                <label class="coluna">CNPJ da Instituição:
+                <input type="number" id="campoCNPJ" required>
                 </label>
             </div>
             <div class="linha">
                 <label class="coluna">Especialidade
-                <input type="text" required>
+                <input type="text" id="campoEspecialidade" required>
                 </label>
              </div>
             <input type="submit" id="enviar" value="Enviar">
