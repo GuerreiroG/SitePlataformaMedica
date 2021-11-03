@@ -31,6 +31,7 @@ $( document ).ready(function() {
     });
 
     $("#enviar").click(function(){
+        var pessoa_cadastro = " "
         // pegar os dados do formulario
         surgimento = $("#campoSurgimento").val();
         estado = $("#campoEstado").val();
@@ -59,6 +60,7 @@ $( document ).ready(function() {
             tipo_instituicao: tipo_instituicao, cnpj: cnpj};
             var dados = Object.assign({}, dadosGerais, dadosInstituicao); 
             dados = JSON.stringify(dados);
+            pessoa_cadastro = "Instituicao"
 
         // Se for médico
         } else if ($("#campoEspecialidade").val() != "") {
@@ -73,6 +75,7 @@ $( document ).ready(function() {
             cnpj_instituicao: cnpj_instituicao, status_medico: status_medico}
             var dados = Object.assign({}, dadosGerais, dadosMedico);
             dados = JSON.stringify(dados);
+            pessoa_cadastro = "Medico"
         
         // Se for paciente
         } else {
@@ -84,11 +87,12 @@ $( document ).ready(function() {
             cpf: cpf};
             var dados = Object.assign({}, dadosGerais, dadosPaciente);
             dados = JSON.stringify(dados);
+            pessoa_cadastro = "Paciente"
         }
 
         // preparar os dados recebidos para o formato json
         $.ajax({ 
-            url: 'http://localhost:5000/incluir_instituicao', 
+            url: 'http://localhost:5000/incluir_instituicao'+pessoa_cadastro, 
             type: 'POST', 
             dataType: 'json', // os dados são recebidos no formato json 
             contentType: 'application/json', // tipo dos dados enviados 
@@ -131,7 +135,7 @@ $( document ).ready(function() {
                 $("#campoCPF").val();
                 $("#campoAlergia").val();
             }
-            
+
         } else {
             alert(retorno.resultado + ":" + retorno.detalhes); 
         } 

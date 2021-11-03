@@ -36,14 +36,19 @@ def listar_usuario(usuario_id):
     return resposta
 
 #teste da rota: curl -d '{"nome_fantasia":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_instituicao
-@app.route("/incluir_instituicao", methods=['post'])
+@app.route("/incluir_instituicao/<str:pessoa_cadastro>", methods=['post'])
 def incluir_instituicao():
     # preparar uma resposta otimista
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
     # receber as informações da nova pessoa
     dados = request.get_json() #(force=True) dispensa Content-Type na requisição
     try: # tentar executar a operação
-      nova = Instituicao(**dados) # criar a nova pessoa
+      if pessoa_cadastro == "Instituicao":
+        nova = Instituicao(**dados) 
+      elif pessoa_cadastro == "Medico":
+        nova = Medico(**dados)
+      else:
+        nova = Paciente(**dados)
       db.session.add(nova) # adicionar no BD
       db.session.commit() # efetivar a operação de gravação
     except Exception as e: # em caso de erro...
