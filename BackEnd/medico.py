@@ -15,6 +15,8 @@ class Medico(Usuario):
     id = db.Column(db.Integer, db.ForeignKey('usuario.id'), primary_key=True)
     nome_medico = db.Column(db.String(254))
     especialidade = db.Column(db.String(254))
+    status_medico = db.Column(db.String(254))
+    cnpj_instituicao = db.Column(db.Integer())
     cpf_medico = db.Column(db.String(254))
     sexo_medico = db.Column(db.String(254))
 
@@ -38,7 +40,8 @@ class Medico(Usuario):
         """
         return super().__str__() + f', {self.nome_medico}, ' +\
         f'{self.cpf_medico}, {self.sexo_medico}, ' +\
-        f'{self.especialidade}, {self.id_instituicao}, {self.instituicao}'
+        f'{self.especialidade}, {self.id_instituicao}, {self.instituicao}' +\
+        f'{self.status_medico}, {self.cnpj_instituicao}' 
     
     def json(self):
         """Adiciona especialidade ao return do json do Usuario
@@ -54,6 +57,8 @@ class Medico(Usuario):
             "sexo_medico" : self.sexo_medico,
             "id_instituicao" : self.id_instituicao,
             "instituicao" : self.instituicao.json(),
+            "status_medico" : self.status_medico,
+            "cnpj_instituicao" : self.cnpj_instituicao
         })
         return json1
 
