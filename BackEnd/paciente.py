@@ -22,7 +22,7 @@ class Paciente(Usuario):
     def __str__(self):
         return super().__str__() + f', {self.nome_completo}, '+\
             f'{self.sexo}, {self.cpf}, '+\
-            f'{self.alergias}'
+            f'{self.alergias}' 
 
     def json(self):
         return super().json() | {
