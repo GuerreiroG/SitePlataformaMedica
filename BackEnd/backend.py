@@ -15,6 +15,7 @@ def padrao():
     return "backend operante"
 
 
+# no CMD, curl localhost:5000/listar_usuarios para testar
 @app.route("/listar_usuarios")
 def listar_usuarios():
 	usuarios = db.session.query(Usuario).all()
@@ -36,19 +37,22 @@ def listar_usuario(usuario_id):
     return resposta
 
 #teste da rota: curl -d '{"nome_fantasia":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_instituicao
-@app.route("/incluir_instituicao/<str:pessoa_cadastro>", methods=['post'])
-def incluir_instituicao():
+@app.route("/incluir_instituicao/<int:pessoa_cadastro>", methods=['post'])
+def incluir_instituicao(pessoa_cadastro):
     # preparar uma resposta otimista
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
     # receber as informações da nova pessoa
     dados = request.get_json() #(force=True) dispensa Content-Type na requisição
     try: # tentar executar a operação
-      if pessoa_cadastro == "Instituicao":
+      if pessoa_cadastro == 1:
         nova = Instituicao(**dados) 
-      elif pessoa_cadastro == "Medico":
+        db.create_all()
+      elif pessoa_cadastro == 2:
         nova = Medico(**dados)
+        db.create_all()
       else:
         nova = Paciente(**dados)
+        db.create_all()
       db.session.add(nova) # adicionar no BD
       db.session.commit() # efetivar a operação de gravação
     except Exception as e: # em caso de erro...
@@ -60,7 +64,7 @@ def incluir_instituicao():
 
 
 
-# no CMD, curl localhost:5000/listar_usuarios para testar
+
 
 
 # faz com que renicie toda vez que salvar.

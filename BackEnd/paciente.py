@@ -25,12 +25,14 @@ class Paciente(Usuario):
             f'{self.alergias}' 
 
     def json(self):
-        return super().json() | {
+        json1 = super().json()
+        json1.update({
             "nome_completo" : self.nome_completo,
             "sexo" : self.sexo,
             "cpf" : self.cpf,
-            "alergias" : self.alergias
-        }
+            "alergias" : self.alergias  
+        })
+        return json1
 
 # comando para remover arquivo banco de dados caso já exista
 if __name__ == "__main__":

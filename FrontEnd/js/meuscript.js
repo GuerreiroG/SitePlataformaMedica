@@ -31,7 +31,7 @@ $( document ).ready(function() {
     });
 
     $("#enviar").click(function(){
-        var pessoa_cadastro = " "
+        var pessoa_cadastro = 0
         // pegar os dados do formulario
         surgimento = $("#campoSurgimento").val();
         estado = $("#campoEstado").val();
@@ -49,7 +49,8 @@ $( document ).ready(function() {
         data_surgimento: surgimento}; 
 
         // Se for instituicao:
-        if ($("#campoRazaoSocial").val() != "") {
+        if (document.getElementById("campoRazaoSocial") != null) {
+            console.log('oi')
             razao_social = $("#campoRazaoSocial").val();
             nome_fantasia = $("#campoNomeFantasia").val();
             tipo_instituicao = $("#campoTipoInstituicao").val();
@@ -60,10 +61,11 @@ $( document ).ready(function() {
             tipo_instituicao: tipo_instituicao, cnpj: cnpj};
             var dados = Object.assign({}, dadosGerais, dadosInstituicao); 
             dados = JSON.stringify(dados);
-            pessoa_cadastro = "Instituicao"
+            pessoa_cadastro = 1
 
         // Se for médico
-        } else if ($("#campoEspecialidade").val() != "") {
+        } else if (document.getElementById("campoEspecialidade") != null) {
+            console.log('medico')
             nome_medico = $("#campoNomeCompleto").val();
             especialidade= $("#campoEspecialidade").val();
             cpf_medico = $("#campoCPF").val();
@@ -75,24 +77,25 @@ $( document ).ready(function() {
             cnpj_instituicao: cnpj_instituicao, status_medico: status_medico}
             var dados = Object.assign({}, dadosGerais, dadosMedico);
             dados = JSON.stringify(dados);
-            pessoa_cadastro = "Medico"
+            pessoa_cadastro = 2
         
         // Se for paciente
         } else {
+            console.log('paciente')
             nome_completo = $("#campoNomeCompleto").val();
-            sexo = $("[name='sexo']");
+            sexo = $("input[name='flexRadioDefault sexo']:checked").val();
             cpf = $("#campoCPF").val();
             alergias = $("#campoAlergia").val();
-            let dadosPaciente = {nome_completo: nomecompleto, sexo: sexo,
-            cpf: cpf};
+            let dadosPaciente = {nome_completo: nome_completo,
+            sexo: sexo, cpf: cpf, alergias: alergias};
             var dados = Object.assign({}, dadosGerais, dadosPaciente);
             dados = JSON.stringify(dados);
-            pessoa_cadastro = "Paciente"
+            pessoa_cadastro = 3
         }
 
         // preparar os dados recebidos para o formato json
         $.ajax({ 
-            url: 'http://localhost:5000/incluir_instituicao'+pessoa_cadastro, 
+            url: 'http://localhost:5000/incluir_instituicao/'+pessoa_cadastro, 
             type: 'POST', 
             dataType: 'json', // os dados são recebidos no formato json 
             contentType: 'application/json', // tipo dos dados enviados 
