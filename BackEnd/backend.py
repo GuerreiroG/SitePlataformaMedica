@@ -62,5 +62,14 @@ def incluir_instituicao(pessoa_cadastro):
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta # responder!
 
+@app.route("/validar_login")
+def validar_login():
+  resposta="oi"
+  resposta = jsonify(resposta)
+  resposta.headers.add("Access-Control-Allow-Origin", "*")
+  return resposta
+    
+
+
 # faz com que renicie toda vez que salvar.
 app.run(debug=True)

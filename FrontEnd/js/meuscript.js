@@ -148,4 +148,30 @@ $( document ).ready(function() {
         alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes); 
     }
 
+    $("#enviarLogin").click(function(){
+        emailLogin = $("#campoEmail").val();
+        senhaLogin = $("#campoSenha").val();
+        role = $("input[name='flexRadioDefault role']:checked").val();
+        listaLogin = {email: emailLogin, senha: senhaLogin, role: role};
+        listaLogin = JSON.stringify(listaLogin);
+        
+        $.ajax({ 
+            url: 'http://localhost:5000/validar_login', 
+            type: 'POST', 
+            dataType: 'json', // os dados são recebidos no formato json 
+            contentType: 'application/json', // tipo dos dados enviados 
+            data: listaLogin, // estes são os dados enviados 
+            success: loginCorreto, // chama a função listar para processar o resultado 
+            error: loginIncorreto
+        });
+    });
+
+    function loginCorreto (retorno) {
+        console.log(retorno)  
+    }
+
+    function loginIncorreto (retorno) {
+        alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
+    }
+
 });
