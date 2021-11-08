@@ -27,7 +27,7 @@ def listar_usuarios():
 	return resposta
 
 
-@app.route("/exibir_usuario/<int:usuario_id>")
+@app.route("/exibirUsuario/<int:usuario_id>")
 def listar_usuario(usuario_id):
     usuarios = db.session.query(Usuario).filter(Usuario.id == usuario_id)
     retorno = []
@@ -37,7 +37,7 @@ def listar_usuario(usuario_id):
     return resposta
 
 #teste da rota: curl -d '{"nome_fantasia":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_instituicao
-@app.route("/incluir_instituicao/<int:pessoa_cadastro>", methods=['post'])
+@app.route("/incluir_usuario/<int:pessoa_cadastro>", methods=['post'])
 def incluir_instituicao(pessoa_cadastro):
     # preparar uma resposta otimista
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
@@ -61,11 +61,6 @@ def incluir_instituicao(pessoa_cadastro):
     # adicionar cabeçalho de liberação de origem
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta # responder!
-
-
-
-
-
 
 # faz com que renicie toda vez que salvar.
 app.run(debug=True)

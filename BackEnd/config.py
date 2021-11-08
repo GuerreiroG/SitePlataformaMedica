@@ -16,7 +16,7 @@ path = os.path.dirname(os.path.abspath(__file__))
 
 #concatena o caminho de cima com o nome do arquivo de banco de dados
 # caminho do arquivo config + nome arquivo bd
-arquivobd = os.path.join(path, 'testeDB.db')
+arquivobd = os.path.join(path, 'usuariosDB.db')
 
 #diz onde o banco de dado vai ser criado
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///"+arquivobd

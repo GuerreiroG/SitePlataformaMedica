@@ -196,9 +196,11 @@ h1{
     margin-right: auto;
     margin-left: auto;
 }
-#enviar{
+#enviar,
+#enviarSenha{
     margin-top: 1.5em;
 }
+
 .foto_perfil{
     width: 300px;
     height: 300px;

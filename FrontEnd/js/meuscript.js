@@ -4,15 +4,15 @@ $( document ).ready(function() {
         let id_usuario = 1;
 
         $.ajax({
-            url: 'http://localhost:5000/exibir_usuario/'+id_usuario,
+            url: 'http://localhost:5000/exibirUsuario/'+id_usuario,
             method: 'GET',
             dataType: 'json', // os dados são recebidos no formato json
-            success: exibir_usuario, // chama a função exibir_usuario para processar o resultado
+            success: exibirUsuario, // chama a função exibirUsuario para processar o resultado
             error: function() {
                 alert("erro ao ler dados, verifique o backend");
             }
         });
-        function exibir_usuario(usuario) {
+        function exibirUsuario(usuario) {
             
             // montar uma linha da tabela de usuarios
             const lista_dados = [usuario[0].razao_social, usuario[0].cidade + "/" + usuario[0].estado,  
@@ -95,7 +95,7 @@ $( document ).ready(function() {
 
         // preparar os dados recebidos para o formato json
         $.ajax({ 
-            url: 'http://localhost:5000/incluir_instituicao/'+pessoa_cadastro, 
+            url: 'http://localhost:5000/incluir_usuario/'+pessoa_cadastro, 
             type: 'POST', 
             dataType: 'json', // os dados são recebidos no formato json 
             contentType: 'application/json', // tipo dos dados enviados 
