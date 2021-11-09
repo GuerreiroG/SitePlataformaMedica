@@ -62,12 +62,19 @@ def incluir_instituicao(pessoa_cadastro):
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta # responder!
 
-@app.route("/validar_login")
+#curl -d '{"email":"lucasv@email.com", "senha":"tuairma12345"}' -X POST -H "Content-Type:application/json" localhost:5000/validar_login
+@app.route("/validar_login", methods=['post'])
 def validar_login():
-  resposta="oi"
-  resposta = jsonify(resposta)
-  resposta.headers.add("Access-Control-Allow-Origin", "*")
-  return resposta
+  dados = request.get_json()
+  email = dados["email"]
+  usuarios = db.session.query(Usuario).filter(Usuario.email==email)
+  retorno = []
+  retorno.append(usuarios[0].json())
+  print(retorno)
+  print(":| deu bo ou no?")
+  #dados = jsonify(dados)
+  #dados.headers.add("Access-Control-Allow-Origin", "*")
+  return dados["email"]
     
 
 
