@@ -151,8 +151,7 @@ $( document ).ready(function() {
     $("#enviarLogin").click(function(){
         emailLogin = $("#campoEmail").val();
         senhaLogin = $("#campoSenha").val();
-        role = $("input[name='flexRadioDefault role']:checked").val();
-        listaLogin = {email: emailLogin, senha: senhaLogin, role: role};
+        listaLogin = {email: emailLogin, senha: senhaLogin};
         listaLogin = JSON.stringify(listaLogin);
         
         $.ajax({ 
@@ -167,7 +166,12 @@ $( document ).ready(function() {
     });
 
     function loginCorreto (retorno) {
-        console.log(retorno)  
+        if (retorno == 0){
+            alert("Senha incorreta")
+        } else {
+            alert("Senha Correta")
+            
+        }
     }
 
     function loginIncorreto (retorno) {

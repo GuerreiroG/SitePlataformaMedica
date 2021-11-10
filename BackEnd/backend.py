@@ -28,7 +28,7 @@ def listar_usuarios():
 
 
 @app.route("/exibirUsuario/<int:usuario_id>")
-def listar_usuario(usuario_id):
+def exibir_usuario(usuario_id):
     usuarios = db.session.query(Usuario).filter(Usuario.id == usuario_id)
     retorno = []
     retorno.append(usuarios[0].json())
@@ -62,19 +62,21 @@ def incluir_instituicao(pessoa_cadastro):
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta # responder!
 
-#curl -d '{"email":"lucasv@email.com", "senha":"tuairma12345"}' -X POST -H "Content-Type:application/json" localhost:5000/validar_login
+#curl -d '{"email":"lucasv@email.com", "senha":"123", "role":"medico"}' -X POST -H "Content-Type:application/json" localhost:5000/validar_login
 @app.route("/validar_login", methods=['post'])
 def validar_login():
   dados = request.get_json()
-  email = dados["email"]
-  usuarios = db.session.query(Usuario).filter(Usuario.email==email)
   retorno = []
-  retorno.append(usuarios[0].json())
-  print(retorno)
-  print(":| deu bo ou no?")
-  #dados = jsonify(dados)
-  #dados.headers.add("Access-Control-Allow-Origin", "*")
-  return dados["email"]
+  usuario = db.session.query(Usuario).filter(Usuario.email==dados["email"]).first()
+  if usuario.senha == dados["senha"]:
+    retorno.append(usuario.id)
+    print("não é um hacker")
+  else:
+    retorno.append(0)
+    print("é um hacker")
+  resposta = jsonify(retorno)
+  resposta.headers.add("Access-Control-Allow-Origin", "*")
+  return resposta
     
 
 
