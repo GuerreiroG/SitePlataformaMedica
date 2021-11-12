@@ -1,3 +1,4 @@
+// Função para exibir perfil do usuário
 function carregarLogin(){
 
     url = window.location.href;
@@ -14,9 +15,9 @@ function carregarLogin(){
         }
     });
     function exibirUsuario(usuario) {
-        
+        // Exibe perfil de uma instituição
         if (usuario[0].razao_social != null){
-            const lista_dados = ['<b>Razão Social: </b>' + usuario[0].razao_social, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
+            var lista_dados = ['<b>Razão Social: </b>' + usuario[0].razao_social, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
             '<b>Endereço: </b>'+usuario[0].endereco,'<b>CEP: </b>'+ usuario[0].cep,'<b>Telefone: </b>'+ usuario[0].telefone,'<b>E-Mail: </b>'+ usuario[0].email,
             '<b>Data Fundação: </b>'+ usuario[0].data_surgimento, '<b>Tipo da Instituição: </b>'+usuario[0].tipo_instituicao];
             var linha = '<h1>' + usuario[0].nome_fantasia + '</h1>';
@@ -26,17 +27,39 @@ function carregarLogin(){
                 linha = linha + lin
             };
 
-            $("#inf_instituicao").append(linha);
-
+        // Exibe perfil de um médico
         } else if (usuario[0].nome_medico != null){
+            var lista_dados = ['<b>Especialidade: </b>' + usuario[0].especialidade, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
+            '<b>Sexo: </b>'+usuario[0].sexo_medico,'<b>CNPJ da Instituição: </b>'+ usuario[0].cnpj_instituicao,'<b>Telefone: </b>'+ usuario[0].telefone,
+            '<b>E-Mail: </b>'+ usuario[0].email, '<b>Status: </b>'+usuario[0].status_medico];
+            var linha = '<h1>' + usuario[0].nome_medico + '</h1>';
+
+            for (var i in lista_dados) {
+                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
+                linha = linha + lin
+            };
     
+        // Exibe perfil de um paciente
         } else {
-            
+            var lista_dados = ['<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
+            '<b>Sexo: </b>'+usuario[0].sexo,'<b>Telefone: </b>'+ usuario[0].telefone,
+            '<b>E-Mail: </b>'+ usuario[0].email, '<b>Alergias: </b>'+usuario[0].alergias];
+            var linha = '<h1>' + usuario[0].nome_completo + '</h1>';
+
+            for (var i in lista_dados) {
+                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
+                linha = linha + lin
+            };
         } 
+
+        $("#inf_usuario").append(linha);
+
     };
 };
+
 $( document ).ready(function() {
 
+    // Função para recolher os dados do formulário e enviar ao backend para efetuar o cadastro.
     $("#enviar").click(function(){
         var pessoa_cadastro = 0
         // pegar os dados do formulario
@@ -57,7 +80,6 @@ $( document ).ready(function() {
 
         // Se for instituicao:
         if (document.getElementById("campoRazaoSocial") != null) {
-            console.log('oi')
             razao_social = $("#campoRazaoSocial").val();
             nome_fantasia = $("#campoNomeFantasia").val();
             tipo_instituicao = $("#campoTipoInstituicao").val();
@@ -116,34 +138,34 @@ $( document ).ready(function() {
     function pessoaIncluida (retorno) { 
         if (retorno.resultado == "ok") {
             alert("Pessoa incluída com sucesso!"); 
-            $("#campoSurgimento").val();
-            $("#campoEstado").val();
-            $("#campoCidade").val();
-            $("#campoEndereco").val();
-            $("#campoComplemento").val();
-            $("#campoCEP").val();
-            $("#campoSenha").val();
-            $("#campoConfirmarSenha").val();
-            $("#campoEmail").val();
-            $("#campoConfirmarEmail").val();
-            $("#campoTelefone").val();
+            $("#campoSurgimento").val("");
+            $("#campoEstado").val("");
+            $("#campoCidade").val("");
+            $("#campoEndereco").val("");
+            $("#campoComplemento").val("");
+            $("#campoCEP").val("");
+            $("#campoSenha").val("");
+            $("#campoConfirmarSenha").val("");
+            $("#campoEmail").val("");
+            $("#campoConfirmarEmail").val("");
+            $("#campoTelefone").val("");
 
             if ($("#campoRazaoSocial").val() != "") {
-                $("#campoRazaoSocial").val();
-                $("#campoNomeFantasia").val();
-                $("#campoTipoInstituicao").val();
-                $("#campoNumeroFuncionariuos").val();
-                $("#campoCNPJ").val();
+                $("#campoRazaoSocial").val("");
+                $("#campoNomeFantasia").val("");
+                $("#campoTipoInstituicao").val("");
+                $("#campoNumeroFuncionariuos").val("");
+                $("#campoCNPJ").val("");
             } else if ($("#campoEspecialidade").val() != "") {
-                $("#campoNomeCompleto").val();
-                $("#campoEspecialidade").val();
-                $("#campoCPF").val();
-                $("#campoCNPJ").val();
-                $("#campoStatus").val();
+                $("#campoNomeCompleto").val("");
+                $("#campoEspecialidade").val("");
+                $("#campoCPF").val("");
+                $("#campoCNPJ").val("");
+                $("#campoStatus").val("");
             } else {
-                $("#campoNomeCompleto").val();
-                $("#campoCPF").val();
-                $("#campoAlergia").val();
+                $("#campoNomeCompleto").val("");
+                $("#campoCPF").val("");
+                $("#campoAlergia").val("");
             }
 
         } else {
@@ -155,6 +177,7 @@ $( document ).ready(function() {
         alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes); 
     }
 
+    // função para pegar os dados de login e enviar para o backend para validação
     $("#enviarLogin").click(function(){
         emailLogin = $("#campoEmail").val();
         senhaLogin = $("#campoSenha").val();
@@ -174,10 +197,10 @@ $( document ).ready(function() {
 
     function loginCorreto (retorno) {
         if (retorno == 0){
-            alert("Senha incorreta")
+            alert("Dados incorretos")
         } else {
-            alert("Senha Correta")
-            window.location.href = 'perfil_instituicao.html?' + retorno;
+            alert("Dados corretos, redirecionando para o perfil")
+            window.location.href = 'perfil_usuario.html?' + retorno;
         }
     }
 

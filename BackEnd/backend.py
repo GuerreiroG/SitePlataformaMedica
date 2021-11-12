@@ -26,7 +26,7 @@ def listar_usuarios():
 	resposta.headers.add("Access-Control-Allow-Origin", "*")
 	return resposta
 
-
+#Função que pega as informações do usuário para exibir no perfil
 @app.route("/exibirUsuario/<int:usuario_id>")
 def exibir_usuario(usuario_id):
     usuarios = db.session.query(Usuario).filter(Usuario.id == usuario_id)
@@ -37,6 +37,7 @@ def exibir_usuario(usuario_id):
     return resposta
 
 #teste da rota: curl -d '{"nome_fantasia":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_instituicao
+#Função para incluir um usuário no banco de dados.
 @app.route("/incluir_usuario/<int:pessoa_cadastro>", methods=['post'])
 def incluir_instituicao(pessoa_cadastro):
     # preparar uma resposta otimista
@@ -63,17 +64,18 @@ def incluir_instituicao(pessoa_cadastro):
     return resposta # responder!
 
 #curl -d '{"email":"lucasv@email.com", "senha":"123", "role":"medico"}' -X POST -H "Content-Type:application/json" localhost:5000/validar_login
+#Função para validar os dados de login
 @app.route("/validar_login", methods=['post'])
 def validar_login():
   dados = request.get_json()
   retorno = []
   usuario = db.session.query(Usuario).filter(Usuario.email==dados["email"]).first()
-  if usuario.senha == dados["senha"]:
+  if usuario == None:
+    retorno.append(0)
+  elif usuario.senha == dados["senha"]:
     retorno.append(usuario.id)
-    print("não é um hacker")
   else:
     retorno.append(0)
-    print("é um hacker")
   resposta = jsonify(retorno)
   resposta.headers.add("Access-Control-Allow-Origin", "*")
   return resposta
