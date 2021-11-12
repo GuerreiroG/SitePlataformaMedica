@@ -1,23 +1,24 @@
-$( document ).ready(function() {
-    
-    $("#listar").click(function(){
-        let id_usuario = 1;
+function carregarLogin(){
 
-        $.ajax({
-            url: 'http://localhost:5000/exibirUsuario/'+id_usuario,
-            method: 'GET',
-            dataType: 'json', // os dados são recebidos no formato json
-            success: exibirUsuario, // chama a função exibirUsuario para processar o resultado
-            error: function() {
-                alert("erro ao ler dados, verifique o backend");
-            }
-        });
-        function exibirUsuario(usuario) {
-            
-            // montar uma linha da tabela de usuarios
-            const lista_dados = [usuario[0].razao_social, usuario[0].cidade + "/" + usuario[0].estado,  
-            usuario[0].endereco, usuario[0].cep, usuario[0].telefone, usuario[0].email, usuario[0].data_surgimento,
-            usuario[0].tipo_instituicao];
+    url = window.location.href;
+
+    id_usuario = url.split("?").pop();
+
+    $.ajax({
+        url: 'http://localhost:5000/exibirUsuario/'+id_usuario,
+        method: 'GET',
+        dataType: 'json', // os dados são recebidos no formato json
+        success: exibirUsuario, // chama a função exibirUsuario para processar o resultado
+        error: function() {
+            alert("erro ao ler dados, verifique o backend");
+        }
+    });
+    function exibirUsuario(usuario) {
+        
+        if (usuario[0].razao_social != null){
+            const lista_dados = ['<b>Razão Social: </b>' + usuario[0].razao_social, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
+            '<b>Endereço: </b>'+usuario[0].endereco,'<b>CEP: </b>'+ usuario[0].cep,'<b>Telefone: </b>'+ usuario[0].telefone,'<b>E-Mail: </b>'+ usuario[0].email,
+            '<b>Data Fundação: </b>'+ usuario[0].data_surgimento, '<b>Tipo da Instituição: </b>'+usuario[0].tipo_instituicao];
             var linha = '<h1>' + usuario[0].nome_fantasia + '</h1>';
 
             for (var i in lista_dados) {
@@ -27,8 +28,14 @@ $( document ).ready(function() {
 
             $("#inf_instituicao").append(linha);
 
-            }
-    });
+        } else if (usuario[0].nome_medico != null){
+    
+        } else {
+            
+        } 
+    };
+};
+$( document ).ready(function() {
 
     $("#enviar").click(function(){
         var pessoa_cadastro = 0
@@ -69,7 +76,7 @@ $( document ).ready(function() {
             nome_medico = $("#campoNomeCompleto").val();
             especialidade= $("#campoEspecialidade").val();
             cpf_medico = $("#campoCPF").val();
-            sexo_medico = $("[name='sexo']");
+            sexo_medico = $("input[name='flexRadioDefault sexo']:checked").val();
             cnpj_instituicao = $("#campoCNPJ").val();
             status_medico = $("#campoStatus").val();
             let dadosMedico = {nome_medico: nome_medico, especialidade: especialidade,
@@ -170,7 +177,7 @@ $( document ).ready(function() {
             alert("Senha incorreta")
         } else {
             alert("Senha Correta")
-            
+            window.location.href = 'perfil_instituicao.html?' + retorno;
         }
     }
 

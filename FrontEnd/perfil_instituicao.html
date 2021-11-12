@@ -11,7 +11,7 @@
       <script src="js/meuscript.js"></script>
       <title>Perfil da Instituição</title>
    </head>
-   <body id="body_perfil_instituicao">
+   <body id="body_perfil_instituicao" onload="carregarLogin()">
       <nav>
          <ul>
             <li>
@@ -40,6 +40,23 @@
             </div>
           </div>
       </div>
+      <div class="modal fade" id="modal_cadastro" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="ModalLabel">Escolha uma opção de cadastro:</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body login-modal">
+               <a class="btn btn-outline-primary btn-lg" href="cadastro_paciente.html"> Cadastro para Paciente </a>
+               <a class="btn btn-outline-primary btn-lg" href="cadastro_instituicao.html"> Cadastro para Instituição </a>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+             </div>
+           </div>
+         </div>
+       </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
    </body>
 </html>
