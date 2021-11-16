@@ -63,7 +63,6 @@ def incluir_instituicao(pessoa_cadastro):
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta # responder!
 
-#curl -d '{"email":"lucasv@email.com", "senha":"123", "role":"medico"}' -X POST -H "Content-Type:application/json" localhost:5000/validar_login
 #Função para validar os dados de login
 @app.route("/validar_login", methods=['post'])
 def validar_login():
@@ -80,7 +79,6 @@ def validar_login():
   resposta.headers.add("Access-Control-Allow-Origin", "*")
   return resposta
     
-
 
 # faz com que renicie toda vez que salvar.
 app.run(debug=True)

@@ -83,7 +83,7 @@ $( document ).ready(function() {
             razao_social = $("#campoRazaoSocial").val();
             nome_fantasia = $("#campoNomeFantasia").val();
             tipo_instituicao = $("#campoTipoInstituicao").val();
-            numero_funcionarios = $("#campoNumeroFuncionariuos").val();
+            numero_funcionarios = $("#campoNumeroFuncionarios").val();
             cnpj = $("#campoCNPJ").val();
             let dadosInstituicao = {nome_fantasia: nome_fantasia, 
             razao_social: razao_social, numero_funcionarios: numero_funcionarios,
