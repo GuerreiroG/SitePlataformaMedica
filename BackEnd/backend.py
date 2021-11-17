@@ -47,13 +47,11 @@ def incluir_instituicao(pessoa_cadastro):
     try: # tentar executar a operação
       if pessoa_cadastro == 1:
         nova = Instituicao(**dados) 
-        db.create_all()
       elif pessoa_cadastro == 2:
         nova = Medico(**dados)
-        db.create_all()
       else:
         nova = Paciente(**dados)
-        db.create_all()
+      db.create_all() # cria as tabelas se não existirem
       db.session.add(nova) # adicionar no BD
       db.session.commit() # efetivar a operação de gravação
     except Exception as e: # em caso de erro...
@@ -79,6 +77,25 @@ def validar_login():
   resposta.headers.add("Access-Control-Allow-Origin", "*")
   return resposta
     
+
+# curl -X DELETE http://localhost:5000/excluir_pessoa/1
+# Função para excluir um usuário do Banco de Dados.
+@app.route("/excluir_usuario/<int:usuario_id>", methods=['DELETE'])
+def excluir_usuario(usuario_id):
+  # prepara uma resposta
+  resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+  try:
+    # excluir o usuário do ID informado
+    Usuario.query.filter(Usuario.id == usuario_id).delete()
+    # confimar a exclusão
+    db.session.commit()
+  except Exception as e:
+    # informar mensagem de erro
+    resposta = jsonify({"resultado": "erro", "detalhes":str(e)})
+  resposta.headers.add("Access-Control-Allow-Origin", "*")  
+  return resposta
+  
+
 
 # faz com que renicie toda vez que salvar.
 app.run(debug=True)
