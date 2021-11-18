@@ -54,6 +54,9 @@ function carregarLogin(){
 
         $("#inf_usuario").append(linha);
 
+        if (sessionStorage.perfil == id_usuario){
+            $("#inf_usuario").append('<p>Você é você :)</p>')
+        };
     };
 };
 
@@ -200,6 +203,9 @@ $( document ).ready(function() {
             alert("Dados incorretos")
         } else {
             alert("Dados corretos, redirecionando para o perfil")
+
+            sessionStorage.setItem('perfil',retorno);
+
             window.location.href = 'perfil_usuario.html?' + retorno;
         }
     }
