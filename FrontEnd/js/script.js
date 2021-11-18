@@ -214,4 +214,31 @@ $( document ).ready(function() {
         alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
     }
 
+    // função que detecta clique no botão excluir e chama função do backend
+    $("#botaoExcluir").click(function(){
+        url = window.location.href;
+
+        id_usuario = url.split("?").pop();
+        
+        $.ajax({
+            url: 'http://localhost:5000/excluir_usuario/'+id_usuario,
+            method: 'DELETE',
+            dataType: 'json', // os dados são recebidos no formato json
+            success: usuarioExcluido, // chama a função exibirUsuario para processar o resultado
+            error: function() {
+                alert("erro ao excluir, verifique o backend");
+            }
+        });
+    });
+    function usuarioExcluido(retorno) {
+        if (retorno.resultado == "ok") {
+            // Se o deu certo, avisa o usuario e redireciona para o home
+            alert("Usuario excluido");
+            window.location.href = 'login_geral.html';
+        } else {
+            // Se deu errado, exibe o erro
+            alert(retorno.resultado + ":" + retorno.detalhes);
+        }
+    }
+
 });
