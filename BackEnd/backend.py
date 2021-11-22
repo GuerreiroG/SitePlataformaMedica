@@ -36,7 +36,7 @@ def exibir_usuario(usuario_id):
     resposta.headers.add("Access-Control-Allow-Origin", "*")
     return resposta
 
-#teste da rota: curl -d '{"nome_fantasia":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_instituicao
+#teste da rota: curl -d '{"id": "20", "nome_completo":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_usuario/3
 #Função para incluir um usuário no banco de dados.
 @app.route("/incluir_usuario/<int:pessoa_cadastro>", methods=['post'])
 def incluir_instituicao(pessoa_cadastro):
@@ -78,7 +78,7 @@ def validar_login():
   return resposta
     
 
-# curl -X DELETE http://localhost:5000/excluir_pessoa/1
+# curl -X DELETE http://localhost:5000/excluir_usuario/1
 # Função para excluir um usuário do Banco de Dados.
 @app.route("/excluir_usuario/<int:usuario_id>", methods=['DELETE'])
 def excluir_usuario(usuario_id):
@@ -86,6 +86,13 @@ def excluir_usuario(usuario_id):
   resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
   try:
     # excluir o usuário do ID informado
+    usuario = db.session.query(Usuario).filter(Usuario.id == usuario_id).first()
+    if usuario.type == "paciente":
+      Paciente.query.filter(Paciente.id == usuario_id).delete()
+    elif usuario.type == "instituicao":
+      Instituicao.query.filter(Instituicao.id == usuario_id).delete()
+    else:
+      Medico.query.filter(Medico.id == usuario_id).delete()
     Usuario.query.filter(Usuario.id == usuario_id).delete()
     # confimar a exclusão
     db.session.commit()

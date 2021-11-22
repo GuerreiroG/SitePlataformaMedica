@@ -62,6 +62,13 @@ function carregarLogin(){
 
 $( document ).ready(function() {
 
+    // definindo uma constante com o formulário e informando que a função deve ser ativada ao usuário apertar no botão submit
+    const formCadastro = document.getElementById('form_cadastro');
+    
+    if (formCadastro != null){
+        formCadastro.addEventListener('submit', logSubmit);
+    }
+
     // Função para recolher os dados do formulário e enviar ao backend para efetuar o cadastro.
     function logSubmit(event){
         var pessoa_cadastro = 0
@@ -138,10 +145,6 @@ $( document ).ready(function() {
         
 
     };
-
-    // definindo uma constante com o formulário e informando que a função deve ser ativada ao usuário apertar no botão submit
-    const form = document.getElementById('form');
-    form.addEventListener('submit', logSubmit);
 
     function pessoaIncluida (retorno) { 
         if (retorno.resultado == "ok") {
