@@ -63,7 +63,7 @@ function carregarLogin(){
 $( document ).ready(function() {
 
     // Função para recolher os dados do formulário e enviar ao backend para efetuar o cadastro.
-    $("#enviar").click(function(){
+    function logSubmit(event){
         var pessoa_cadastro = 0
         // pegar os dados do formulario
         surgimento = $("#campoSurgimento").val();
@@ -135,8 +135,13 @@ $( document ).ready(function() {
             success: pessoaIncluida, // chama a função listar para processar o resultado 
             error: erroAoIncluir
         })
+        
 
-    });
+    };
+
+    // definindo uma constante com o formulário e informando que a função deve ser ativada ao usuário apertar no botão submit
+    const form = document.getElementById('form');
+    form.addEventListener('submit', logSubmit);
 
     function pessoaIncluida (retorno) { 
         if (retorno.resultado == "ok") {
