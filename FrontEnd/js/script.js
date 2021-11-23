@@ -161,13 +161,13 @@ $( document ).ready(function() {
             $("#campoConfirmarEmail").val("");
             $("#campoTelefone").val("");
 
-            if ($("#campoRazaoSocial").val() != "") {
+            if ($("#campoRazaoSocial").val() != null) {
                 $("#campoRazaoSocial").val("");
                 $("#campoNomeFantasia").val("");
                 $("#campoTipoInstituicao").val("");
-                $("#campoNumeroFuncionariuos").val("");
+                $("#campoNumeroFuncionarios").val("");
                 $("#campoCNPJ").val("");
-            } else if ($("#campoEspecialidade").val() != "") {
+            } else if ($("#campoEspecialidade").val() != null) {
                 $("#campoNomeCompleto").val("");
                 $("#campoEspecialidade").val("");
                 $("#campoCPF").val("");
