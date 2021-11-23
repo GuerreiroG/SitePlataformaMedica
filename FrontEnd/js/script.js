@@ -180,7 +180,7 @@ $( document ).ready(function() {
             }
 
         } else {
-            alert(retorno.resultado + ":" + retorno.detalhes); 
+            alert(retorno.resultado + ": " + retorno.detalhes); 
         } 
     } 
 

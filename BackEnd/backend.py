@@ -44,6 +44,11 @@ def incluir_instituicao(pessoa_cadastro):
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
     # receber as informações da nova pessoa
     dados = request.get_json() #(force=True) dispensa Content-Type na requisição
+    # checa se já existe um cadastro com esse email
+    usuario = db.session.query(Usuario).filter(Usuario.email==dados["email"]).first()
+    if usuario != None:
+      resposta = jsonify({"resultado":"erro", "detalhes":"Usuário com este email já existe"})
+      return resposta
     try: # tentar executar a operação
       if pessoa_cadastro == 1:
         nova = Instituicao(**dados) 
