@@ -1,12 +1,58 @@
 // Função para exibir perfil do usuário
 function carregarLogin(){
 
+    // Exibe perfil de uma instituição
+    if (usuario[0].razao_social != null){
+        var lista_dados = ['<b>Razão Social: </b>' + usuario[0].razao_social, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
+        '<b>Endereço: </b>'+usuario[0].endereco,'<b>CEP: </b>'+ usuario[0].cep,'<b>Telefone: </b>'+ usuario[0].telefone,'<b>E-Mail: </b>'+ usuario[0].email,
+        '<b>Data Fundação: </b>'+ usuario[0].data_surgimento, '<b>Tipo da Instituição: </b>'+usuario[0].tipo_instituicao];
+        var linha = '<h1>' + usuario[0].nome_fantasia + '</h1>';
+
+        for (var i in lista_dados) {
+            let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
+            linha = linha + lin
+        };
+
+    // Exibe perfil de um médico
+    } else if (usuario[0].nome_medico != null){
+        var lista_dados = ['<b>Especialidade: </b>' + usuario[0].especialidade, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
+        '<b>Sexo: </b>'+usuario[0].sexo_medico,'<b>CNPJ da Instituição: </b>'+ usuario[0].cnpj_instituicao,'<b>Telefone: </b>'+ usuario[0].telefone,
+        '<b>E-Mail: </b>'+ usuario[0].email, '<b>Status: </b>'+usuario[0].status_medico];
+        var linha = '<h1>' + usuario[0].nome_medico + '</h1>';
+
+        for (var i in lista_dados) {
+            let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
+            linha = linha + lin
+        };
+    
+    // Exibe perfil de um paciente
+    } else {
+        var lista_dados = ['<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
+        '<b>Sexo: </b>'+usuario[0].sexo,'<b>Telefone: </b>'+ usuario[0].telefone,
+        '<b>E-Mail: </b>'+ usuario[0].email, '<b>Alergias: </b>'+usuario[0].alergias];
+        var linha = '<h1>' + usuario[0].nome_completo + '</h1>';
+
+        for (var i in lista_dados) {
+            let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
+            linha = linha + lin
+        };
+    } 
+
+    $("#inf_usuario").append(linha);
+
+    if (sessionStorage.perfil == id_usuario){
+        $("#inf_usuario").append('<p>Você é você :)</p>')
+    };
+};
+
+
+function coletarDados(){
     url = window.location.href;
 
     id_usuario = url.split("?").pop();
 
     $.ajax({
-        url: 'http://localhost:5000/exibirUsuario/'+id_usuario,
+        url: 'http://localhost:5000/coletarDados/'+id_usuario,
         method: 'GET',
         dataType: 'json', // os dados são recebidos no formato json
         success: exibirUsuario, // chama a função exibirUsuario para processar o resultado
@@ -14,50 +60,6 @@ function carregarLogin(){
             alert("erro ao ler dados, verifique o backend");
         }
     });
-    function exibirUsuario(usuario) {
-        // Exibe perfil de uma instituição
-        if (usuario[0].razao_social != null){
-            var lista_dados = ['<b>Razão Social: </b>' + usuario[0].razao_social, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
-            '<b>Endereço: </b>'+usuario[0].endereco,'<b>CEP: </b>'+ usuario[0].cep,'<b>Telefone: </b>'+ usuario[0].telefone,'<b>E-Mail: </b>'+ usuario[0].email,
-            '<b>Data Fundação: </b>'+ usuario[0].data_surgimento, '<b>Tipo da Instituição: </b>'+usuario[0].tipo_instituicao];
-            var linha = '<h1>' + usuario[0].nome_fantasia + '</h1>';
-
-            for (var i in lista_dados) {
-                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
-                linha = linha + lin
-            };
-
-        // Exibe perfil de um médico
-        } else if (usuario[0].nome_medico != null){
-            var lista_dados = ['<b>Especialidade: </b>' + usuario[0].especialidade, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
-            '<b>Sexo: </b>'+usuario[0].sexo_medico,'<b>CNPJ da Instituição: </b>'+ usuario[0].cnpj_instituicao,'<b>Telefone: </b>'+ usuario[0].telefone,
-            '<b>E-Mail: </b>'+ usuario[0].email, '<b>Status: </b>'+usuario[0].status_medico];
-            var linha = '<h1>' + usuario[0].nome_medico + '</h1>';
-
-            for (var i in lista_dados) {
-                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
-                linha = linha + lin
-            };
-    
-        // Exibe perfil de um paciente
-        } else {
-            var lista_dados = ['<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
-            '<b>Sexo: </b>'+usuario[0].sexo,'<b>Telefone: </b>'+ usuario[0].telefone,
-            '<b>E-Mail: </b>'+ usuario[0].email, '<b>Alergias: </b>'+usuario[0].alergias];
-            var linha = '<h1>' + usuario[0].nome_completo + '</h1>';
-
-            for (var i in lista_dados) {
-                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
-                linha = linha + lin
-            };
-        } 
-
-        $("#inf_usuario").append(linha);
-
-        if (sessionStorage.perfil == id_usuario){
-            $("#inf_usuario").append('<p>Você é você :)</p>')
-        };
-    };
 };
 
 $( document ).ready(function() {
@@ -187,6 +189,7 @@ $( document ).ready(function() {
     function erroAoIncluir (retorno) { 
         alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes); 
     }
+    // --------------------------------
 
     // função para pegar os dados de login e enviar para o backend para validação
     $("#enviarLogin").click(function(){
@@ -221,6 +224,7 @@ $( document ).ready(function() {
     function loginIncorreto (retorno) {
         alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
     }
+    // --------------------------------
 
     // função que detecta clique no botão excluir e chama função do backend
     $("#botaoExcluir").click(function(){
@@ -248,5 +252,37 @@ $( document ).ready(function() {
             alert(retorno.resultado + ":" + retorno.detalhes);
         }
     }
+    // --------------------------------
+
+    // função que detecta clique no botão alterar e chama função do backend
+    $("#botaoAtualizar").click(function(){
+        url = window.location.href;
+
+        id_usuario = url.split("?").pop();
+
+
+
+        $.ajax({
+            url: 'http://localhost:5000/alterar_usuario',
+            method: 'POST',
+            dataType: 'json', // os dados são recebidos no formato json
+            success: dadosAlterados, // chama a função exibirUsuario para processar o resultado
+            error: function() {
+                alert("erro ao excluir, verifique o backend");
+            }
+        });
+    });
+
+    function dadosAlterados(retorno){
+        if (retorno.resultado == "ok"){
+            // Se os dados foram alterados com sucesso, avisa o usuario. 
+            alert("Dados alterados com sucesso")
+            location.reload()
+        } else {
+            // Se deu errado, exibe o erro
+            alert(retorno.resultado + ":" + retorno.detalhes)
+        }
+    }
+    // --------------------------------
 
 });

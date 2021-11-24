@@ -26,9 +26,9 @@ def listar_usuarios():
 	resposta.headers.add("Access-Control-Allow-Origin", "*")
 	return resposta
 
-#Função que pega as informações do usuário para exibir no perfil
-@app.route("/exibirUsuario/<int:usuario_id>")
-def exibir_usuario(usuario_id):
+#Função que pega as informações do usuário
+@app.route("/coletarDados/<int:usuario_id>")
+def coletar_dados(usuario_id):
     usuarios = db.session.query(Usuario).filter(Usuario.id == usuario_id)
     retorno = []
     retorno.append(usuarios[0].json())
