@@ -107,6 +107,39 @@ def excluir_usuario(usuario_id):
   resposta.headers.add("Access-Control-Allow-Origin", "*")  
   return resposta
   
+# curl -d '{"id": "1", "endereco":"Teste"}' -X POST -H "Content-Type:application/json" localhost:5000/atualizar_usuario
+# Função para alterar os dados de um usuário.
+@app.route("/atualizar_usuario", methods=['post'])
+def atualizar_usuario():
+  #prepara uma resposta
+  resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
+  dados = request.get_json()
+  usuario = Usuario.query.filter(Usuario.id == dados["id"]).first()
+  try:
+    # alterar dados de usuario gerais
+    usuario.estado = dados["estado"]
+    usuario.cidade = dados["cidade"]
+    usuario.endereco = dados["endereco"]
+    usuario.complemento = dados["complemento"]
+    usuario.cep = dados["cep"]
+    usuario.senha = dados["senha"]
+    usuario.telefone = dados["tel"]
+    # alterar dados de usuario específicos
+    if usuario.type == "paciente":
+      usuario.alergias = dados["alergias"]
+    elif usuario.type == "instituicao":
+      usuario.numero_funcionarios = dados["numero_funcionarios"]
+    else:
+      usuario.especialidade = dados["especialidade"]
+      usuario.status_medico = dados["status_medico"]
+    db.session.commit()
+  except Exception as e:
+    # informar mensagem de erro
+    resposta = jsonify({"resultado": "erro", "detalhes":str(e)})
+  resposta.headers.add("Access-Control-Allow-Origin", "*")
+  return resposta
+
+
 
 
 # faz com que renicie toda vez que salvar.
