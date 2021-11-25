@@ -18,44 +18,34 @@ function carregarLogin(){
     function exibirUsuario(usuario){
         // Exibe perfil de uma instituição
         if (usuario[0].razao_social != null){
+            var linha = '<h1>' + usuario[0].nome_fantasia + '</h1>';
             var lista_dados = ['<b>Razão Social: </b>' + usuario[0].razao_social, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
             '<b>Endereço: </b>'+usuario[0].endereco,'<b>CEP: </b>'+ usuario[0].cep,'<b>Telefone: </b>'+ usuario[0].telefone,'<b>E-Mail: </b>'+ usuario[0].email,
             '<b>Data Fundação: </b>'+ usuario[0].data_surgimento, '<b>Tipo da Instituição: </b>'+usuario[0].tipo_instituicao];
-            var linha = '<h1>' + usuario[0].nome_fantasia + '</h1>';
-
-            for (var i in lista_dados) {
-                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
-                linha = linha + lin
-            };
-
+            
         // Exibe perfil de um médico
         } else if (usuario[0].nome_medico != null){
+            var linha = '<h1>' + usuario[0].nome_medico + '</h1>';
             var lista_dados = ['<b>Especialidade: </b>' + usuario[0].especialidade, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
             '<b>Sexo: </b>'+usuario[0].sexo_medico,'<b>CNPJ da Instituição: </b>'+ usuario[0].cnpj_instituicao,'<b>Telefone: </b>'+ usuario[0].telefone,
             '<b>E-Mail: </b>'+ usuario[0].email, '<b>Status: </b>'+usuario[0].status_medico];
-            var linha = '<h1>' + usuario[0].nome_medico + '</h1>';
-
-            for (var i in lista_dados) {
-                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
-                linha = linha + lin
-            };
-        
+            
         // Exibe perfil de um paciente
         } else {
+            var linha = '<h1>' + usuario[0].nome_completo + '</h1>';
             var lista_dados = ['<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
             '<b>Sexo: </b>'+usuario[0].sexo,'<b>Telefone: </b>'+ usuario[0].telefone,
             '<b>E-Mail: </b>'+ usuario[0].email, '<b>Alergias: </b>'+usuario[0].alergias];
-            var linha = '<h1>' + usuario[0].nome_completo + '</h1>';
-
-            for (var i in lista_dados) {
-                let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
-                linha = linha + lin
-            };
         } 
+
+        for (var i in lista_dados) {
+            let lin = '<span class="elementos_perfil">' + lista_dados[i] + '</span>';
+            linha = linha + lin
+        };
 
         $("#inf_usuario").append(linha);
 
-        if (sessionStorage.perfil == id_usuario){
+        if (sessionStorage.perfil[0] == id_usuario){
             $("#inf_usuario").append('<p>Você é você :)</p>')
         };
     };
@@ -208,15 +198,14 @@ $( document ).ready(function() {
         });
     });
 
+    // Se o login estiver correto. Adiciona uma SESSÃO e redireciona para o perfil
     function loginCorreto (retorno) {
         if (retorno == 0){
             alert("Dados incorretos")
         } else {
             alert("Dados corretos, redirecionando para o perfil")
-
             sessionStorage.setItem('perfil',retorno);
-
-            window.location.href = 'perfil_usuario.html?' + retorno;
+            window.location.href = 'perfil_usuario.html?' + retorno[0];
         }
     }
 
@@ -232,7 +221,7 @@ $( document ).ready(function() {
         id_usuario = url.split("?").pop();
         
         $.ajax({
-            url: 'http://localhost:5000/excluir_usuario/'+id_usuario,
+            url: 'http://localhost:5000/excluir_usuario/'+sessionStorage.perfil[0],
             method: 'DELETE',
             dataType: 'json', // os dados são recebidos no formato json
             success: usuarioExcluido, // chama a função exibirUsuario para processar o resultado
@@ -255,15 +244,14 @@ $( document ).ready(function() {
 
     // REDIRECIONA para a tela de alteração de dados
     $("#botaoAtualizar").click(function(){
-        url = window.location.href;
 
-        id_usuario = url.split("?").pop();
-
+        listaSession = sessionStorage.perfil.split(",");
+        window.location.href = 'atualizar_'+listaSession[1]+'.html';
     });
     // --------------------------------
 
 
-    
+
     // função que detecta clique no botão alterar e ENVIA dados ao backend
     $("#enviarAtualizacoes").click(function(){
         url = window.location.href;

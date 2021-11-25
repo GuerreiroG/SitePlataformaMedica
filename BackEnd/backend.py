@@ -76,6 +76,8 @@ def validar_login():
     retorno.append(0)
   elif usuario.senha == dados["senha"]:
     retorno.append(usuario.id)
+    retorno.append(usuario.type)
+    print(retorno)
   else:
     retorno.append(0)
   resposta = jsonify(retorno)
