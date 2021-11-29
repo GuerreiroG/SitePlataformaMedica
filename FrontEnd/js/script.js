@@ -54,13 +54,23 @@ function carregarLogin(){
     };
 };
 
+//Função que preparar os valores padrões da página atualizar
+function carregarDadosAtualizar(){
+    return
+}
+
 $( document ).ready(function() {
 
     // definindo uma constante com o formulário e informando que a função deve ser ativada ao usuário apertar no botão submit
     const formCadastro = document.getElementById('form_cadastro');
+    const formAtualizar = document.getElementById('form_atualizar')
     
     if (formCadastro != null){
         formCadastro.addEventListener('submit', logSubmit);
+    }
+
+    if (formAtualizar != null){
+        formAtualizar.addEventListener('submit', enviarAtualizacoes);
     }
 
     // Função para recolher os dados do formulário e enviar ao backend para efetuar o cadastro.
@@ -254,29 +264,60 @@ $( document ).ready(function() {
     // --------------------------------
 
 
-
     // função que detecta clique no botão alterar e ENVIA dados ao backend
-    $("#enviarAtualizacoes").click(function(){
-        url = window.location.href;
+    function enviarAtualizacoes(event){
+        // recolhe os dados gerais
+        estado = $("#campoEstado").val();
+        cidade = $("#campoCidade").val();
+        endereco = $("#campoEndereco").val();
+        complemento = $("#campoComplemento").val();
+        cep = $("#campoCEP").val();
+        senha = $("#campoSenha").val();
+        senha_confirm = $("#campoConfirmarSenha").val();
+        tel = $("#campoTelefone").val();
+        var dadosGerais = {id: sessionStorage[0] ,estado: estado, cidade: cidade, 
+        endereco: endereco, complemento: complemento, cep: cep, telefone: tel, senha: senha}; 
 
-        id_usuario = url.split("?").pop();
+        // se for instituicao
+        if (sessionStorage[2] == "i"){
+            numero_funcionarios = $("#campoNumeroFuncionarios").val();
+            let dadosInstituicao = {numero_funcionarios:numero_funcionarios};
+            var dados = Object.assign({}, dadosGerais, dadosInstituicao);
+    
+        // se for paciente
+        } else if (sessionStorage[2] == "p") {
+            alergias = $("#campoAlergia").val();
+            let dadosPaciente = {alergias: alergias};
+            var dados = Object.assign({}, dadosGerais, dadosPaciente);
+
+        // se for medico
+        } else {
+            status_medico = $("#campoStatus").val();
+            especialidade = $("#campoEspecialidade").val();
+            let dadosMedico = {status_medico: status_medico, especialidade: especialidade};
+            var dados = Object.assign({}, dadosGerais, dadosMedico)
+        }
+
+        dados = JSON.stringify(dados);
 
         $.ajax({
-            url: 'http://localhost:5000/alterar_usuario',
+            url: 'http://localhost:5000/atualizar_usuario',
             method: 'POST',
             dataType: 'json', // os dados são recebidos no formato json
+            contentType: 'application/json', // tipo dos dados enviados 
+            data: dados, // estes são os dados enviados 
             success: dadosAlterados, // chama a função exibirUsuario para processar o resultado
             error: function() {
-                alert("erro ao excluir, verifique o backend");
+                alert("erro ao alterar, verifique o backend");
             }
         });
-    });
+    };
 
     function dadosAlterados(retorno){
         if (retorno.resultado == "ok"){
             // Se os dados foram alterados com sucesso, avisa o usuario. 
             alert("Dados alterados com sucesso")
-            location.reload()
+            window.location.href = 'perfil_usuario.html?' + sessionStorage[0];
         } else {
             // Se deu errado, exibe o erro
             alert(retorno.resultado + ":" + retorno.detalhes)
