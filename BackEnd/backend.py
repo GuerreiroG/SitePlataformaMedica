@@ -45,10 +45,6 @@ def incluir_instituicao(pessoa_cadastro):
     # receber as informações da nova pessoa
     dados = request.get_json() #(force=True) dispensa Content-Type na requisição
     # checa se já existe um cadastro com esse email
-    usuario = db.session.query(Usuario).filter(Usuario.email==dados["email"]).first()
-    if usuario != None:
-      resposta = jsonify({"resultado":"erro", "detalhes":"Usuário com este email já existe"})
-      return resposta
     try: # tentar executar a operação
       if pessoa_cadastro == 1:
         nova = Instituicao(**dados) 
@@ -57,6 +53,10 @@ def incluir_instituicao(pessoa_cadastro):
       else:
         nova = Paciente(**dados)
       db.create_all() # cria as tabelas se não existirem
+      usuario = db.session.query(Usuario).filter(Usuario.email==dados["email"]).first()
+      if usuario != None:
+        resposta = jsonify({"resultado":"erro", "detalhes":"Usuário com este email já existe"})
+        return resposta
       db.session.add(nova) # adicionar no BD
       db.session.commit() # efetivar a operação de gravação
     except Exception as e: # em caso de erro...
