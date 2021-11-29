@@ -46,7 +46,10 @@ function carregarLogin(){
         $("#inf_usuario").append(linha);
 
         if (sessionStorage.perfil[0] == id_usuario){
-            $("#inf_usuario").append('<p>Você é você :)</p>')
+            $("#perfil_buttons").append('<button type="button" id="botaoAtualizar" class="btn btn-warning btn-lg">Alterar Dados</button>')
+            $("#perfil_buttons").append('<button type="button" id="botaoDesconectar" class="btn btn-info btn-lg">Desconectar</button>')
+            $("#perfil_buttons").append('<button type="button" id="botaoExcluir" class="btn btn-danger btn-lg">Excluir Perfil</button>')
+
         };
     };
 };
@@ -215,7 +218,7 @@ $( document ).ready(function() {
     // --------------------------------
 
     // função que detecta clique no botão excluir e chama função do backend
-    $("#botaoExcluir").click(function(){
+    $(document).on("click", "#botaoExcluir", function(){
         url = window.location.href;
 
         id_usuario = url.split("?").pop();
@@ -243,7 +246,7 @@ $( document ).ready(function() {
     // --------------------------------
 
     // REDIRECIONA para a tela de alteração de dados
-    $("#botaoAtualizar").click(function(){
+    $(document).on("click", "#botaoAtualizar", function(){
 
         listaSession = sessionStorage.perfil.split(",");
         window.location.href = 'atualizar_'+listaSession[1]+'.html';
