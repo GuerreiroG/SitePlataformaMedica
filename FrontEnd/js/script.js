@@ -275,17 +275,18 @@ $( document ).ready(function() {
         senha = $("#campoSenha").val();
         senha_confirm = $("#campoConfirmarSenha").val();
         tel = $("#campoTelefone").val();
-        var dadosGerais = {id: sessionStorage[0] ,estado: estado, cidade: cidade, 
+        var dadosGerais = {id: sessionStorage.perfil[0], estado: estado, cidade: cidade, 
         endereco: endereco, complemento: complemento, cep: cep, telefone: tel, senha: senha}; 
+        alert(sessionStorage.perfil[0])
 
         // se for instituicao
-        if (sessionStorage[2] == "i"){
+        if (sessionStorage.perfil[2] == "i"){
             numero_funcionarios = $("#campoNumeroFuncionarios").val();
             let dadosInstituicao = {numero_funcionarios:numero_funcionarios};
             var dados = Object.assign({}, dadosGerais, dadosInstituicao);
     
         // se for paciente
-        } else if (sessionStorage[2] == "p") {
+        } else if (sessionStorage.perfil[2] == "p") {
             alergias = $("#campoAlergia").val();
             let dadosPaciente = {alergias: alergias};
             var dados = Object.assign({}, dadosGerais, dadosPaciente);
@@ -317,7 +318,7 @@ $( document ).ready(function() {
         if (retorno.resultado == "ok"){
             // Se os dados foram alterados com sucesso, avisa o usuario. 
             alert("Dados alterados com sucesso")
-            window.location.href = 'perfil_usuario.html?' + sessionStorage[0];
+            window.location.href = 'perfil_usuario.html?' + sessionStorage.perfil[0];
         } else {
             // Se deu errado, exibe o erro
             alert(retorno.resultado + ":" + retorno.detalhes)

@@ -53,6 +53,7 @@ def incluir_instituicao(pessoa_cadastro):
       else:
         nova = Paciente(**dados)
       db.create_all() # cria as tabelas se não existirem
+      #Checa se já não existe usuário com este email
       usuario = db.session.query(Usuario).filter(Usuario.email==dados["email"]).first()
       if usuario != None:
         resposta = jsonify({"resultado":"erro", "detalhes":"Usuário com este email já existe"})
@@ -116,7 +117,7 @@ def atualizar_usuario():
   #prepara uma resposta
   resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
   dados = request.get_json()
-  usuario = Usuario.query.filter(Usuario.id == dados["id"]).first()
+  usuario = db.session.query(Usuario).filter(Usuario.id == dados["id"]).first()
   try:
     # alterar dados de usuario gerais
     usuario.estado = dados["estado"]
@@ -125,7 +126,7 @@ def atualizar_usuario():
     usuario.complemento = dados["complemento"]
     usuario.cep = dados["cep"]
     usuario.senha = dados["senha"]
-    usuario.telefone = dados["tel"]
+    usuario.telefone = dados["telefone"]
     # alterar dados de usuario específicos
     if usuario.type == "paciente":
       usuario.alergias = dados["alergias"]
