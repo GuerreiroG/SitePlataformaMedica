@@ -56,7 +56,44 @@ function carregarLogin(){
 
 //Função que preparar os valores padrões da página atualizar
 function carregarDadosAtualizar(){
-    return
+    
+    id_usuario = sessionStorage.perfil[0];
+
+    $.ajax({
+        url: 'http://localhost:5000/coletarDados/'+id_usuario,
+        method: 'GET',
+        dataType: 'json', // os dados são recebidos no formato json
+        success: colocarValores, // chama a função colocarValores para processar o resultado
+        error: function() {
+            alert("erro ao ler dados, verifique o backend");
+        }
+    });
+
+    // preenche os valores antigos do usuário no formulário
+    function colocarValores(usuario){
+
+        $("#campoEstado").val(usuario[0].estado);
+        $("#campoCidade").val(usuario[0].cidade);
+        $("#campoEndereco").val(usuario[0].endereco);
+        $("#campoComplemento").val(usuario[0].complemento);
+        $("#campoCEP").val(usuario[0].cep);
+        $("#campoSenha").val(usuario[0].senha);
+        $("#campoConfirmarSenha").val(usuario[0].senha);
+        $("#campoTelefone").val(usuario[0].telefone);
+
+        // se for instituicao
+        if (sessionStorage.perfil[2] == "i"){
+            $("#campoNumeroFuncionarios").val(usuario[0].numero_funcionarios);
+        // se for paciente
+        } else if (sessionStorage.perfil[2] == "p") {
+            $("#campoAlergia").val(usuario[0].alergias);
+        // se for medico
+        } else {
+            $("#campoStatus").val(usuario[0].status_medico);
+            $("#campoEspecialidade").val(usuario[0].especialidade);
+        }
+    }
+
 }
 
 $( document ).ready(function() {
@@ -263,6 +300,11 @@ $( document ).ready(function() {
     });
     // --------------------------------
 
+    // desconecta o usuáro e redireciona para o home
+    $(document).on("click", "#botaoDesconectar", function(){
+        sessionStorage.setItem('perfil', null)
+        window.location.href = 'home.html';
+    });
 
     // função que detecta clique no botão alterar e ENVIA dados ao backend
     function enviarAtualizacoes(event){
