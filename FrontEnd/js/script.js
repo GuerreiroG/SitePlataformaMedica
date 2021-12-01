@@ -96,13 +96,15 @@ function carregarDadosAtualizar(){
 
 $( document ).ready(function() {
 
-    if (sessionStorage.perfil[0] != null){
+    if (sessionStorage.perfil[0] != null && sessionStorage.perfil[0] != 'n'){
         $('#perfil').removeClass('d-none');
+    } else {
+        $('#perfil').addClass('d-none');
     }
 
     // definindo uma constante com o formulário e informando que a função deve ser ativada ao usuário apertar no botão submit
     const formCadastro = document.getElementById('form_cadastro');
-    const formAtualizar = document.getElementById('form_atualizar')
+    const formAtualizar = document.getElementById('form_atualizar');
     
     if (formCadastro != null){
         formCadastro.addEventListener('submit', recolherDados);
@@ -266,16 +268,13 @@ $( document ).ready(function() {
     }
     // --------------------------------
 
-    //function()
-
     // função que detecta clique no botão excluir e chama função do backend
     $(document).on("click", "#botaoExcluir", function(){
-        url = window.location.href;
 
-        id_usuario = url.split("?").pop();
+        id_usuario = sessionStorage.perfil[0];
         
         $.ajax({
-            url: 'http://localhost:5000/excluir_usuario/'+sessionStorage.perfil[0],
+            url: 'http://localhost:5000/excluir_usuario/'+id_usuario,
             method: 'DELETE',
             dataType: 'json', // os dados são recebidos no formato json
             success: usuarioExcluido, // chama a função exibirUsuario para processar o resultado
@@ -284,10 +283,12 @@ $( document ).ready(function() {
             }
         });
     });
+
     function usuarioExcluido(retorno) {
         if (retorno.resultado == "ok") {
             // Se o deu certo, avisa o usuario e redireciona para o home
             alert("Usuario excluido");
+            sessionStorage.setItem('perfil', null);
             window.location.href = 'login_geral.html';
         } else {
             // Se deu errado, exibe o erro
@@ -323,7 +324,6 @@ $( document ).ready(function() {
         tel = $("#campoTelefone").val();
         var dadosGerais = {id: sessionStorage.perfil[0], estado: estado, cidade: cidade, 
         endereco: endereco, complemento: complemento, cep: cep, telefone: tel, senha: senha}; 
-        alert(sessionStorage.perfil[0])
 
         // se for instituicao
         if (sessionStorage.perfil[2] == "i"){
