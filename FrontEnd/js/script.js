@@ -1,9 +1,7 @@
 // Função para exibir perfil do usuário
 function carregarLogin(){
 
-    url = window.location.href;
-
-    id_usuario = url.split("?").pop();
+    id_usuario = sessionStorage.perfil[0]
 
     $.ajax({
         url: 'http://localhost:5000/coletarDados/'+id_usuario,
@@ -98,12 +96,16 @@ function carregarDadosAtualizar(){
 
 $( document ).ready(function() {
 
+    if (sessionStorage.perfil[0] != null){
+        $('#perfil').removeClass('d-none');
+    }
+
     // definindo uma constante com o formulário e informando que a função deve ser ativada ao usuário apertar no botão submit
     const formCadastro = document.getElementById('form_cadastro');
     const formAtualizar = document.getElementById('form_atualizar')
     
     if (formCadastro != null){
-        formCadastro.addEventListener('submit', logSubmit);
+        formCadastro.addEventListener('submit', recolherDados);
     }
 
     if (formAtualizar != null){
@@ -111,7 +113,7 @@ $( document ).ready(function() {
     }
 
     // Função para recolher os dados do formulário e enviar ao backend para efetuar o cadastro.
-    function logSubmit(event){
+    function recolherDados(event){
         var pessoa_cadastro = 0
         // pegar os dados do formulario
         surgimento = $("#campoSurgimento").val();
@@ -263,6 +265,8 @@ $( document ).ready(function() {
         alert("ERRO: "+retorno.resultado + ":" + retorno.detalhes);
     }
     // --------------------------------
+
+    //function()
 
     // função que detecta clique no botão excluir e chama função do backend
     $(document).on("click", "#botaoExcluir", function(){
