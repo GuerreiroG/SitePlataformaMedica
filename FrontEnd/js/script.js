@@ -96,11 +96,14 @@ function carregarDadosAtualizar(){
 
 $( document ).ready(function() {
 
+    try{
     if (sessionStorage.perfil[0] != null && sessionStorage.perfil[0] != 'n'){
-        $('#perfil').removeClass('d-none');
-    } else {
-        $('#perfil').addClass('d-none');
-    }
+            $('#perfil').removeClass('d-none');
+        } else {
+            $('#perfil').addClass('d-none');
+        }
+    } catch {sessionStorage.setItem('perfil',null)}
+
 
     // definindo uma constante com o formulário e informando que a função deve ser ativada ao usuário apertar no botão submit
     const formCadastro = document.getElementById('form_cadastro');
