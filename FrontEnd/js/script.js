@@ -25,7 +25,7 @@ function carregarLogin(){
         } else if (usuario[0].nome_medico != null){
             var linha = '<h1>' + usuario[0].nome_medico + '</h1>';
             var lista_dados = ['<b>Especialidade: </b>' + usuario[0].especialidade, '<b>Cidade/Estado: </b>' + usuario[0].cidade + " / " + usuario[0].estado.toUpperCase(),  
-            '<b>Sexo: </b>'+usuario[0].sexo_medico,'<b>CNPJ da Instituição: </b>'+ usuario[0].cnpj_instituicao,'<b>Telefone: </b>'+ usuario[0].telefone,
+            '<b>Sexo: </b>'+usuario[0].sexo_medico, '<b>Telefone: </b>'+ usuario[0].telefone,
             '<b>E-Mail: </b>'+ usuario[0].email, '<b>Status: </b>'+usuario[0].status_medico];
             
         // Exibe perfil de um paciente
@@ -100,6 +100,9 @@ $( document ).ready(function() {
     try{
     if (sessionStorage.perfil[0] != null && sessionStorage.perfil[0] != 'n'){
             $('#perfil').removeClass('d-none');
+            if (sessionStorage.perfil[2] == 'i'){
+                $('#cadastroMedico').removeClass('d-none');
+            }
         } else {
             $('#perfil').addClass('d-none');
         }
@@ -168,11 +171,11 @@ $( document ).ready(function() {
             especialidade= $("#campoEspecialidade").val();
             cpf_medico = $("#campoCPF").val();
             sexo_medico = $("input[name='flexRadioDefault sexo']:checked").val();
-            cnpj_instituicao = $("#campoCNPJ").val();
+            id_instituicao = sessionStorage.perfil[0];
             status_medico = $("#campoStatus").val();
             let dadosMedico = {nome_medico: nome_medico, especialidade: especialidade,
             cpf_medico: cpf_medico, sexo_medico: sexo_medico, 
-            cnpj_instituicao: cnpj_instituicao, status_medico: status_medico}
+            id_instituicao: id_instituicao, status_medico: status_medico}
             var dados = Object.assign({}, dadosGerais, dadosMedico);
             dados = JSON.stringify(dados);
             pessoa_cadastro = 2

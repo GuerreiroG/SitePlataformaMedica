@@ -102,6 +102,7 @@ def excluir_usuario(usuario_id):
     else:
       Medico.query.filter(Medico.id == usuario_id).delete()
     Usuario.query.filter(Usuario.id == usuario_id).delete()
+    
     # confimar a exclusão
     db.session.commit()
   except Exception as e:

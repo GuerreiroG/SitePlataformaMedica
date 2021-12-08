@@ -16,7 +16,6 @@ class Medico(Usuario):
     nome_medico = db.Column(db.String(254))
     especialidade = db.Column(db.String(254))
     status_medico = db.Column(db.String(254))
-    cnpj_instituicao = db.Column(db.Integer())
     cpf_medico = db.Column(db.String(254))
     sexo_medico = db.Column(db.String(254))
 
@@ -41,7 +40,7 @@ class Medico(Usuario):
         return super().__str__() + f', {self.nome_medico}, ' +\
         f'{self.cpf_medico}, {self.sexo_medico}, ' +\
         f'{self.especialidade}, {self.id_instituicao}, {self.instituicao}' +\
-        f'{self.status_medico}, {self.cnpj_instituicao}' 
+        f'{self.status_medico}' 
     
     def json(self):
         """Adiciona especialidade ao return do json do Usuario
@@ -58,7 +57,6 @@ class Medico(Usuario):
             "id_instituicao" : self.id_instituicao,
             "instituicao" : self.instituicao.json(),
             "status_medico" : self.status_medico,
-            "cnpj_instituicao" : self.cnpj_instituicao
         })
         return json1
 
@@ -85,7 +83,7 @@ if __name__ == "__main__":
     telefone="47888888888", email="gustavog@email.com", senha="321",
     data_surgimento="11/11/2011", nome_medico="Jorge", especialidade="Urologia",
     sexo_medico="Masculino", cpf_medico="989.654.258-89", id_instituicao="1",
-    cnpj_instituicao="999999999999", status_medico="Ativo")
+    status_medico="Ativo")
     
     # torna os objetos persistentes
     db.session.add(instituicao_teste)
