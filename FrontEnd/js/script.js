@@ -96,6 +96,7 @@ function carregarDadosAtualizar(){
 
 $( document ).ready(function() {
 
+    // Checa se há uma sessão, se sim, adiciona o botão perfil na navbar.
     try{
     if (sessionStorage.perfil[0] != null && sessionStorage.perfil[0] != 'n'){
             $('#perfil').removeClass('d-none');
@@ -132,6 +133,16 @@ $( document ).ready(function() {
         email = $("#campoEmail").val();
         email_confirm = $("#campoConfirmarEmail").val();
         tel = $("#campoTelefone").val();
+        
+        // Checa se a senha e o email batem com os seus respectivos campos de confirmação.
+        if (senha != senha_confirm){
+            return alert('As senhas estão diferentes')
+        }
+        if (email != email_confirm){
+            return alert('Os emails estão diferentes')
+        }
+
+        // Coloca todos os valores em um dicionário
         var dadosGerais = {estado: estado, cidade: cidade, endereco: endereco,
         complemento: complemento, cep: cep, telefone: tel, email: email, senha: senha, 
         data_surgimento: surgimento}; 

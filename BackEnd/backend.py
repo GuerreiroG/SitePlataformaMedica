@@ -39,7 +39,7 @@ def coletar_dados(usuario_id):
 #teste da rota: curl -d '{"id": "20", "nome_completo":"John", "email":"jakirk@gmail.com", "telefone":"92212-1212"}' -X POST -H "Content-Type:application/json" localhost:5000/incluir_usuario/3
 #Função para incluir um usuário no banco de dados.
 @app.route("/incluir_usuario/<int:pessoa_cadastro>", methods=['post'])
-def incluir_instituicao(pessoa_cadastro):
+def incluir_usuario(pessoa_cadastro):
     # preparar uma resposta otimista
     resposta = jsonify({"resultado": "ok", "detalhes": "ok"})
     # receber as informações da nova pessoa
