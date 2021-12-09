@@ -23,7 +23,7 @@ class Medico(Usuario):
     id_instituicao = db.Column(db.Integer, db.ForeignKey('instituicao.id'), nullable=False)
     
     # atributo de relacionamento
-    instituicao = db.relationship("Instituicao", foreign_keys=[id_instituicao])
+    instituicao = db.relationship("Instituicao", backref=backref("Medico", cascade="all,delete"), foreign_keys=[id_instituicao])
 
     # definindo indentidade polimórfica que ficará armazenada na classe pai
     # no campo type

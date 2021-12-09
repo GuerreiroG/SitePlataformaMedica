@@ -98,14 +98,13 @@ $( document ).ready(function() {
 
     // Checa se há uma sessão, se sim, adiciona o botão perfil na navbar.
     try{
-    if (sessionStorage.perfil[0] != null && sessionStorage.perfil[0] != 'n'){
+        if (sessionStorage.perfil[0] != null && sessionStorage.perfil[0] != 'n'){
             $('#perfil').removeClass('d-none');
+            $('#cadastro').addClass('d-none')
             if (sessionStorage.perfil[2] == 'i'){
                 $('#cadastroMedico').removeClass('d-none');
             }
-        } else {
-            $('#perfil').addClass('d-none');
-        }
+        } 
     } catch {sessionStorage.setItem('perfil',null)}
 
 

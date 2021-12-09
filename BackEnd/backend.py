@@ -98,7 +98,8 @@ def excluir_usuario(usuario_id):
     if usuario.type == "paciente":
       Paciente.query.filter(Paciente.id == usuario_id).delete()
     elif usuario.type == "instituicao":
-      Instituicao.query.filter(Instituicao.id == usuario_id).delete()
+      obj_instituicao = Instituicao.query.filter(Instituicao.id == usuario_id).first()
+      db.session.delete(obj_instituicao)
     else:
       Medico.query.filter(Medico.id == usuario_id).delete()
     Usuario.query.filter(Usuario.id == usuario_id).delete()

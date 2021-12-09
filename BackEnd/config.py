@@ -4,6 +4,7 @@ Autor: Gustavo Guerreiro, Johannes Wachholz José e Lucas Vargas
 """
 from flask import Flask, jsonify, request #Sera usado para a integração web=BD
 from flask_sqlalchemy import SQLAlchemy # Importando framework
+from sqlalchemy.orm import backref
 import os #Para usar o path
 from flask_cors import CORS
 
