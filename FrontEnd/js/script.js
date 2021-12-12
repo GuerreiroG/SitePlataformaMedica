@@ -209,7 +209,7 @@ $( document ).ready(function() {
 
     function pessoaIncluida (retorno) { 
         if (retorno.resultado == "ok") {
-            alert("Pessoa incluída com sucesso!"); 
+            alert("Usuário incluída com sucesso!"); 
             $("#campoSurgimento").val("");
             $("#campoEstado").val("");
             $("#campoCidade").val("");
